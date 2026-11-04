@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matiasr-data.github.io/mineria-con-datos/sitemap.xml

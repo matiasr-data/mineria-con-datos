@@ -34,20 +34,24 @@ python -m http.server 8765 --directory web
 
 y abrir http://localhost:8765.
 
-## Publicarlo
+## Publicado
 
-Opción simple, **Netlify Drop**: entrar a app.netlify.com/drop y arrastrar la carpeta `web`. Da un enlace público al instante.
+- Dirección: https://matiasr-data.github.io/mineria-con-datos/
+- Repositorio: https://github.com/matiasr-data/mineria-con-datos (esta carpeta `web/` es el repositorio).
+- Para publicar un cambio, desde la carpeta `web/`:
 
-Opción con historial, **GitHub Pages**: subir el proyecto a un repositorio, ir a Settings > Pages y elegir la carpeta `/web` (o subir solo el contenido de `web`).
+  ```
+  git add -A
+  git commit -m "Qué cambió"
+  git push
+  ```
 
-Cuando el sitio tenga dirección definitiva:
-
-- En `index.html`, cambiar `img/compartir.png` en las etiquetas `og:image` por la dirección completa (por ejemplo `https://tu-dominio/img/compartir.png`) y agregar `<link rel="canonical" href="https://tu-dominio/">`.
-- Sumar un `sitemap.xml` y un `robots.txt` con esa dirección.
+  GitHub Pages lo actualiza en uno o dos minutos.
+- Si más adelante se usa un dominio propio, cambiar la dirección en `index.html` (canonical, og:url y og:image), `robots.txt` y `sitemap.xml`.
 
 ## Pendiente
 
-- Decidir dónde se publica y si se usa dominio propio.
+- Decidir si se usa dominio propio.
 - Agregar los enlaces a Instagram, TikTok y LinkedIn cuando estén los usuarios definitivos.
 - El correo de contacto que figura es `matiasrico21ps@gmail.com`; cambiarlo si preferís uno exclusivo para el proyecto.
 - Confirmar a mano los números del T3 2025 contra el PDF de Barrick.
