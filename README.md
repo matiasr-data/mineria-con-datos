@@ -12,7 +12,7 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 - `guias/*.pdf`: las guías descargables. **Se copian solas desde `recursos/`** al correr el script.
 - `404.html`: la página que aparece si alguien entra a una dirección que no existe.
 - `robots.txt` y `sitemap.xml`: para buscadores.
-- `img/compartir.png`: imagen que aparece cuando se comparte el enlace en LinkedIn o WhatsApp.
+- `img/compartir.png`: imagen que aparece cuando se comparte el enlace en LinkedIn o WhatsApp. Se genera con `herramientas/imagen_compartir.html` (el comando está en ese archivo).
 
 ## Actualizar el panel cuando Barrick publica un trimestre
 
