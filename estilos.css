@@ -60,6 +60,9 @@ header.top .wrap{display:flex;align-items:center;gap:8px 28px;padding-block:10px
 nav{display:flex;gap:4px 22px;flex-wrap:wrap;font-size:16px;font-weight:600}
 nav a{text-decoration:none;color:var(--muted);padding-block:8px;border-bottom:2px solid transparent}
 nav a:hover,nav a[aria-current="true"]{color:var(--fg);border-bottom-color:var(--bar)}
+/* Contacto queda aparte del resto de las secciones, separado por una línea. */
+nav a.nav-contacto{position:relative;margin-left:12px}
+nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width:1px;height:18px;transform:translateY(-50%);background:var(--line)}
 
 /* ---------- Botones ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 20px;border-radius:8px;font-weight:700;font-size:16px;text-decoration:none;border:1.5px solid color-mix(in srgb,var(--fg) 45%,transparent);cursor:pointer;font-family:inherit;line-height:1.3;
@@ -295,17 +298,22 @@ dl.facts dd{margin:0;text-align:right;font-weight:600}
 }
 .honest{margin-top:40px;font-size:15px;color:var(--muted);max-width:75ch;border-left:3px solid var(--bar);padding-left:14px}
 
-.contact{margin-top:64px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 40px;align-items:center;background:var(--paper);color:var(--paper-ink);border-radius:16px;padding:40px}
-@media (max-width:760px){.contact{grid-template-columns:1fr;padding:28px 22px}}
-.contact h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(30px,4vw,42px);letter-spacing:.01em}
+.to-contact{margin-top:28px}
+.contact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:var(--paper);color:var(--paper-ink);border-radius:16px;overflow:hidden}
+.contact .channel{padding:36px 40px}
+.contact .channel + .channel{border-left:1px solid color-mix(in srgb,var(--paper-ink) 18%,transparent)}
+@media (max-width:760px){.contact{grid-template-columns:1fr}.contact .channel{padding:28px 22px}.contact .channel + .channel{border-left:0;border-top:1px solid color-mix(in srgb,var(--paper-ink) 18%,transparent)}}
+.contact h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,3.4vw,38px);letter-spacing:.01em}
 .contact p{color:var(--paper-muted);margin-top:10px}
+.contact .mailtxt{font-family:var(--font-mono);font-size:15px;color:var(--paper-ink);margin:6px 0 18px}
+.contact .channel-note{font-size:15px;margin-top:14px}
 .contact .btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
 .contact .btn.primary:hover{background:var(--violet-dark);border-color:var(--violet-dark)}
 .contact .btn.ghost{color:var(--paper-ink);border-color:color-mix(in srgb,var(--paper-ink) 45%,transparent)}
 .contact .btn.ghost:hover{border-color:var(--violet)}
 .contact :focus-visible{outline-color:var(--violet)}
 .mailbox{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.mailtxt{font-size:15px;color:var(--paper-muted);margin-top:12px;overflow-wrap:anywhere}
+.mailtxt{overflow-wrap:anywhere}
 
 /* ---------- Correcciones ---------- */
 .log{list-style:none;margin:0;padding:0;border-top:2px solid var(--fg)}

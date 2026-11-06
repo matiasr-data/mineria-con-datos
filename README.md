@@ -63,7 +63,7 @@ y abrir http://localhost:8765.
 ## Pendiente
 
 - Decidir si se usa dominio propio.
-- Agregar los enlaces a Instagram, TikTok y LinkedIn cuando estén los usuarios definitivos.
+- Instagram ya está (@mineriacondatos, en la sección Contacto y en el pie). Agregar TikTok y LinkedIn cuando estén los usuarios definitivos.
 - El correo de contacto que figura es `matiasrico21ps@gmail.com`; cambiarlo si preferís uno exclusivo para el proyecto.
 - Confirmar a mano los números del T3 2025 contra el PDF de Barrick.
 - Cargar el T3 2026 cuando Barrick lo publique (9 de noviembre de 2026).
