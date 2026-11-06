@@ -169,10 +169,10 @@
         return (pairs.length - 1) * 70 + 720;
       },
       /* Bucle: una ola de luz pasa por las barras en orden de trimestre, cada 3 s.
-         El pico es 0,15 para que la barra no baje de 3:1 contra el fondo (#B07A12 aclarado queda en 3,0:1). */
+         La ola oscurece el oro: en el pico (0,35) la barra queda en #A4863D, 5,5:1 contra el fondo. */
       loop: function () {
         pairs.forEach(function (p) {
-          addLoop(svg._m, p.wave, [{ opacity: 0, offset: 0 }, { opacity: 0.15, offset: 0.1 }, { opacity: 0, offset: 0.28 }, { opacity: 0, offset: 1 }],
+          addLoop(svg._m, p.wave, [{ opacity: 0, offset: 0 }, { opacity: 0.35, offset: 0.1 }, { opacity: 0, offset: 0.28 }, { opacity: 0, offset: 1 }],
             { duration: 3000, delay: p.slot * 150, easing: "ease-in-out" });
         });
       }
