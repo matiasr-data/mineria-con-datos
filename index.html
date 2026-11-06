@@ -8,13 +8,13 @@
 <meta name="author" content="Matías">
 <meta name="theme-color" content="#F1F3F0" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E1512" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://matiasr-data.github.io/mineria-con-datos/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:site_name" content="Minería con Datos">
-<meta property="og:title" content="Minería con Datos · San Juan">
-<meta property="og:description" content="Veladero trimestre a trimestre, casos de uso y proyectos mineros de San Juan, explicados con datos y con fuente.">
-<link rel="canonical" href="https://matiasr-data.github.io/mineria-con-datos/">
 <meta property="og:url" content="https://matiasr-data.github.io/mineria-con-datos/">
+<meta property="og:title" content="Minería con Datos: la minería de San Juan, con datos y con fuente">
+<meta property="og:description" content="Veladero trimestre a trimestre, casos de uso, proyectos que vienen y guías para descargar.">
 <meta property="og:image" content="https://matiasr-data.github.io/mineria-con-datos/img/compartir.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -23,9 +23,8 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2315201B'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23D9A441' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="estilos.css">
-<script>document.documentElement.classList.add("js")</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +32,7 @@
   "name": "Minería con Datos",
   "url": "https://matiasr-data.github.io/mineria-con-datos/",
   "inLanguage": "es-AR",
-  "description": "Ciencia de datos aplicada a la minería de San Juan, Argentina: panel de Veladero, casos de uso y proyectos.",
+  "description": "Ciencia de datos aplicada a la minería de San Juan, Argentina: panel de Veladero, casos de uso, proyectos y guías.",
   "author": {
     "@type": "Person",
     "name": "Matías",
@@ -44,36 +43,52 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Veladero: producción y costos trimestrales",
+  "description": "Producción de oro (mina completa y parte de Barrick), mineral procesado, ley y costos por onza de la mina Veladero, San Juan, Argentina, por trimestre desde 2025. Cifras tomadas de los informes trimestrales de Barrick.",
+  "inLanguage": "es-AR",
+  "spatialCoverage": {"@type": "Place", "name": "Veladero, Iglesia, San Juan, Argentina"},
+  "temporalCoverage": "2025-01/2026-06",
+  "isBasedOn": "https://www.barrick.com/English/investors/quarterly-reports/default.aspx",
+  "creator": {"@type": "Person", "name": "Matías"},
+  "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://matiasr-data.github.io/mineria-con-datos/datos/veladero_trimestral_barrick.csv"}
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#principal">Saltar al contenido</a>
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#inicio"><i aria-hidden="true"></i>Minería con Datos</a>
+    <a class="brand" href="#inicio" translate="no"><i aria-hidden="true"></i>Minería con Datos</a>
     <nav aria-label="Secciones">
       <a href="#panel">Panel Veladero</a>
       <a href="#casos">Casos de uso</a>
       <a href="#proyectos">Proyectos</a>
+      <a href="#guias">Guías</a>
       <a href="#empresas">Para empresas</a>
     </nav>
+    <a class="btn primary small" href="#contacto">Escribime</a>
   </div>
 </header>
 
 <main id="principal">
 <div class="hero" id="inicio">
-  <svg class="contour" id="contour" viewBox="0 0 680 420" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg>
+  <svg class="contour" id="contour" viewBox="0 0 760 460" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg>
   <div class="wrap hero-grid">
     <div>
-      <p class="eyebrow">Ciencia de datos aplicada a la minería · San Juan</p>
+      <p class="kicker">Ciencia de datos aplicada a la minería de San Juan</p>
       <h1>Los datos de la minería sanjuanina, claros y con fuente.</h1>
-      <p class="lead">Ordeno la información pública de Veladero, Vicuña y los proyectos que vienen, y muestro qué puede aportar la ciencia de datos en cada etapa: de la exploración a la operación.</p>
+      <p class="lead">Ordeno la información pública de Veladero, Vicuña y los proyectos que vienen, y muestro qué puede aportar la ciencia de datos en cada etapa, de la exploración a la operación.</p>
       <div class="cta-row">
         <a class="btn primary" href="#panel">Ver el panel de Veladero</a>
-        <a class="btn ghost" href="#empresas">Trabajemos juntos</a>
+        <a class="btn ghost" href="#empresas">Qué puedo hacer por tu empresa</a>
       </div>
     </div>
-    <aside class="snap" id="snap" aria-label="Último dato cargado de Veladero">
+    <aside class="snap" aria-label="Último dato cargado de Veladero">
       <p class="snap-k">Último dato cargado</p>
       <div class="snap-body" id="snap-body">
         <div class="skel" style="width:60%"></div>
@@ -84,13 +99,13 @@
   </div>
   <div class="wrap">
     <div class="audiences">
-      <a class="aud" href="#proyectos"><b>Si querés informarte</b><span>Qué produce Veladero, qué proyectos vienen en San Juan y en qué etapa están, con la fuente de cada cifra.</span></a>
-      <a class="aud" href="#empresas"><b>Si sos empresa o proveedor</b><span>Tableros, orden de datos y pruebas de concepto, empezando por algo chico y medible.</span></a>
+      <a class="aud" href="#proyectos"><b>Para informarte</b><span>Qué produce Veladero, qué proyectos vienen en San Juan y en qué etapa están, con la fuente de cada cifra.</span></a>
+      <a class="aud" href="#empresas"><b>Para empresas y proveedores</b><span>Tableros, orden de datos y pruebas de concepto, empezando por algo chico y medible.</span></a>
     </div>
     <div class="method">
       <div><b>Cada cifra, con fuente y fecha</b>Informes de Barrick, organismos oficiales y prensa, siempre identificados.</div>
       <div><b>Los datos simulados se rotulan</b>Si un ejemplo no es de una mina real, lo dice en pantalla.</div>
-      <div><b>Si me equivoco, lo corrijo</b>Y lo muestro en el <a href="#correcciones">registro de correcciones</a>.</div>
+      <div><b>Si me equivoco, lo corrijo</b>Y queda anotado en el <a href="#correcciones">registro de correcciones</a>.</div>
     </div>
   </div>
 </div>
@@ -98,8 +113,7 @@
 <!-- ============ PANEL ============ -->
 <section class="alt" id="panel">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Panel de datos · Veladero</p>
+    <div class="sec-head">
       <h2>Veladero, trimestre a trimestre</h2>
       <p>Mina de oro en Iglesia, San Juan, de Barrick y Shandong Gold (50% cada una). Las cifras salen de los informes trimestrales de Barrick y se actualizan cuando la empresa publica uno nuevo.</p>
     </div>
@@ -110,13 +124,14 @@
     </div>
 
     <div id="panel-body">
+      <div class="motion-ctl"><button type="button" class="btn ghost small" data-pausa aria-pressed="false" hidden>Pausar animación</button></div>
       <div class="kpis" id="kpis"></div>
 
       <div class="charts">
         <figure class="chart">
           <div class="chart-top">
             <div>
-              <h3 id="t-prod">Oro producido, mina completa (100%)</h3>
+              <h3 id="t-prod" aria-live="polite">Oro producido, mina completa (100%)</h3>
               <div class="sub">Miles de onzas por trimestre</div>
             </div>
             <div class="seg" role="group" aria-label="Elegir base de la producción">
@@ -167,48 +182,50 @@
 <!-- ============ CASOS DE USO ============ -->
 <section id="casos">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Casos de uso</p>
+    <div class="sec-head">
       <h2>Dónde aporta la ciencia de datos en una mina</h2>
       <p>Cinco frentes donde los datos ya se usan en minería y hacia dónde van. Son ejemplos generales: no describen lo que hace hoy una mina en particular.</p>
     </div>
 
     <div class="uses">
-      <article class="use reveal">
-        <div><h3>Mantenimiento predictivo</h3><p class="tag">Detección de anomalías · series de tiempo</p></div>
+      <article class="use">
+        <div><h3>Mantenimiento predictivo</h3><p class="tag">Detección de anomalías y series de tiempo</p></div>
         <div class="col"><b>Hoy</b><p>Con vibración, temperatura y horas de uso de camiones y molinos, detectar un desvío antes de que se convierta en falla y planificar la parada.</p></div>
         <div class="col"><b>A futuro</b><p>Estimar cuánta vida útil le queda a cada componente y pedir el repuesto con tiempo.</p></div>
       </article>
-      <article class="use reveal">
-        <div><h3>Energía y combustible</h3><p class="tag">Regresión · optimización</p></div>
+      <article class="use">
+        <div><h3>Energía y combustible</h3><p class="tag">Regresión y optimización</p></div>
         <div class="col"><b>Hoy</b><p>Comparar consumos por ruta, turno y equipo para encontrar dónde se gasta de más.</p></div>
         <div class="col"><b>A futuro</b><p>Anticipar la demanda eléctrica de una operación y ajustar el despacho de equipos para gastar menos por tonelada.</p></div>
       </article>
-      <article class="use reveal">
-        <div><h3>Exploración geológica</h3><p class="tag">Clasificación · análisis espacial</p></div>
+      <article class="use">
+        <div><h3>Exploración geológica</h3><p class="tag">Clasificación y análisis espacial</p></div>
         <div class="col"><b>Hoy</b><p>Ordenar muestras, geoquímica y perforaciones en una sola base y verlas en un mapa.</p></div>
         <div class="col"><b>A futuro</b><p>Combinar esos datos con imágenes satelitales para priorizar dónde perforar primero.</p></div>
       </article>
-      <article class="use reveal">
-        <div><h3>Proveedores y cadena de suministro</h3><p class="tag">Tableros · pronóstico de demanda</p></div>
+      <article class="use">
+        <div><h3>Proveedores y cadena de suministro</h3><p class="tag">Tableros y pronóstico de demanda</p></div>
         <div class="col"><b>Hoy</b><p>Tableros de costos, plazos de entrega y cumplimiento de cada proveedor.</p></div>
         <div class="col"><b>A futuro</b><p>Que un proveedor local pueda anticipar qué insumos y servicios va a pedir cada proyecto y cuándo.</p></div>
       </article>
-      <article class="use reveal">
-        <div><h3>Seguridad y ambiente</h3><p class="tag">Monitoreo · alertas</p></div>
+      <article class="use">
+        <div><h3>Seguridad y ambiente</h3><p class="tag">Monitoreo y alertas</p></div>
         <div class="col"><b>Hoy</b><p>Reunir mediciones de agua, aire e incidentes en un tablero con alertas claras.</p></div>
         <div class="col"><b>A futuro</b><p>Detectar patrones antes de un incidente y mostrar el seguimiento ambiental de forma abierta.</p></div>
       </article>
     </div>
     <p class="note">Base: nota de Tiempo de San Juan sobre los usos de la inteligencia artificial en minería. Las técnicas y los ejemplos son propuestas propias.</p>
 
-    <div class="demo reveal">
-      <img src="img/vibracion_camiones.png" width="1350" height="750" loading="lazy" alt="Gráfico de vibración diaria de tres camiones con datos simulados. El camión 2 se dispara a partir del 25 de octubre y queda marcado en rojo.">
+    <div class="demo">
+      <picture>
+        <source srcset="img/vibracion_camiones.webp" type="image/webp">
+        <img src="img/vibracion_camiones.png" width="1350" height="750" loading="lazy" decoding="async" alt="Gráfico de vibración diaria de tres camiones con datos simulados. El camión 2 se dispara a partir del 25 de octubre y queda marcado en rojo.">
+      </picture>
       <div>
         <span class="chip sim">Datos simulados</span>
         <h3>Ejemplo: alerta temprana en camiones</h3>
         <p>Tres camiones con vibración simulada. El camión 2 empieza a deteriorarse el día 25 y el sistema lo marca el día 26, cuando supera el promedio más tres desvíos de sus primeros diez días.</p>
-        <p>No representa a ninguna mina real. Está hecho con Python, SQL y matplotlib, y el código está en el proyecto.</p>
+        <p>No representa a ninguna mina real. El paso a paso, con el código en Python y SQL, está en la <a href="#guias">guía de sensores</a>.</p>
       </div>
     </div>
   </div>
@@ -217,51 +234,50 @@
 <!-- ============ PROYECTOS ============ -->
 <section class="alt" id="proyectos">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Proyectos</p>
+    <div class="sec-head">
       <h2>Lo que viene en San Juan, y qué datos va a generar</h2>
       <p>Los proyectos mineros de la provincia según su etapa, los que están más cerca de construirse y los proyectos de datos que armo con esa información.</p>
     </div>
 
-    <h3 class="sub-h" style="margin-top:0">Proyectos por etapa</h3>
-    <div class="stages reveal">
+    <h3 class="sub-h first">Proyectos por etapa</h3>
+    <div class="stages">
       <div class="stage"><span class="st">Producción</span><ul><li>Veladero</li><li>Gualcamayo</li></ul><small class="stage-m">Oro y plata</small></div>
       <div class="stage"><span class="st">Preconstrucción</span><ul><li>Josemaría<small>Parte de Vicuña</small></li></ul><small class="stage-m">Cobre</small></div>
       <div class="stage"><span class="st">Factibilidad</span><ul><li>Los Azules</li><li>Pachón</li><li>Hualilán</li></ul><small class="stage-m">Cobre, molibdeno, oro, plata, plomo y zinc</small></div>
       <div class="stage"><span class="st">Prefactibilidad</span><ul><li>Altar</li></ul><small class="stage-m">Cobre y oro</small></div>
       <div class="stage"><span class="st">Exploración avanzada</span><ul><li>Filo del Sol<small>Parte de Vicuña</small></li><li>Chita</li><li>Del Carmen</li><li>Piuquenes</li><li>Coipita</li></ul><small class="stage-m">Cobre, oro, plata y molibdeno</small></div>
     </div>
-    <p class="note">Fuente: Ministerio de Minería de San Juan, citado por Diario de Cuyo (nota sin fecha visible). Fuente secundaria: a confirmar con el Ministerio.</p>
+    <p class="note">Fuente: Ministerio de Minería de San Juan, citado por Diario de Cuyo (nota sin fecha visible). Es una fuente secundaria y falta confirmarla con el Ministerio.</p>
 
     <h3 class="sub-h">Los más cerca de avanzar</h3>
     <div class="feature-grid">
-      <article class="card feature reveal">
-        <span class="chip">RIGI aprobado · Resolución 1154/2026</span>
+      <article class="feature">
+        <span class="chip">RIGI aprobado, Resolución 1154/2026</span>
         <h4>Vicuña: Josemaría y Filo del Sol</h4>
         <p>Sociedad conjunta de BHP y Lundin Mining. La primera etapa es Josemaría; después se suma Filo del Sol.</p>
-        <dl>
-          <dt>Compromiso inicial de inversión</dt><dd>US$9.737 millones</dd>
-          <dt>Inversión total, primeros 10 años</dt><dd>hasta US$18.000 millones</dd>
+        <dl class="facts">
+          <dt>Compromiso inicial de inversión</dt><dd>US$9.737&nbsp;millones</dd>
+          <dt>Inversión total, primeros 10 años</dt><dd>hasta US$18.000&nbsp;millones</dd>
           <dt>Primer concentrado de cobre</dt><dd>2030</dd>
-          <dt>Demanda eléctrica inicial</dt><dd>260 MW</dd>
+          <dt>Demanda eléctrica inicial</dt><dd>260&nbsp;MW</dd>
           <dt>Red de proveedores</dt><dd>245, de ellos 150 de San Juan</dd>
         </dl>
         <div class="angle"><b>Qué puede aportar la ciencia de datos</b><p>Seguir el avance de obra y las compras a proveedores locales, planificar la demanda de energía y arrancar el mantenimiento predictivo desde el primer equipo.</p></div>
         <p class="src">Fuente: iProfesional, 30/7/2026 y 23/9/2026 (cita la Evaluación Económica Preliminar de febrero de 2026). Falta contrastar con la presentación de la empresa.</p>
       </article>
       <div class="feature-side">
-        <article class="card reveal">
+        <article class="side-item">
           <span class="chip">Factibilidad</span>
           <h4>Los Azules</h4>
-          <p>Proyecto de cobre de McEwen Copper, en el RIGI desde septiembre de 2025. Obtuvo un préstamo de US$240 millones y, según la empresa, la decisión final de inversión sería a mediados de 2027.</p>
-          <div class="angle"><b>Datos</b><p>Un análisis económico que muestre cómo cambia el proyecto con el precio del cobre.</p></div>
+          <p>Proyecto de cobre de McEwen Copper, en el RIGI desde septiembre de 2025. Obtuvo un préstamo de US$240&nbsp;millones y, según la empresa, la decisión final de inversión sería a mediados de 2027.</p>
+          <div class="angle"><b>Con datos</b><p>Un análisis económico que muestre cómo cambia el proyecto con el precio del cobre.</p></div>
           <p class="src">Fuente: Mejor Energía, 31/8/2026. Fecha de decisión a confirmar.</p>
         </article>
-        <article class="card reveal">
+        <article class="side-item">
           <span class="chip live">En producción</span>
           <h4>Veladero: fases 8 y 9</h4>
-          <p>Con el RIGI aprobado el 6 de abril de 2026, Barrick y Shandong Gold invierten US$380 millones en las fases 8 y 9 de la pila de lixiviación.</p>
-          <div class="angle"><b>Datos</b><p>El panel de esta página: producción, ley y costos cada trimestre.</p></div>
+          <p>Con el RIGI aprobado el 6 de abril de 2026, Barrick y Shandong Gold invierten US$380&nbsp;millones en las fases 8 y 9 de la pila de lixiviación.</p>
+          <div class="angle"><b>Con datos</b><p>El panel de esta página: producción, ley y costos cada trimestre.</p></div>
           <p class="src">Fuente: iProfesional, abril de 2026.</p>
         </article>
       </div>
@@ -270,26 +286,59 @@
     <h3 class="sub-h">Mis proyectos de datos</h3>
     <p class="sub-p">Cada uno con su estado. Lo que todavía no está hecho figura como pendiente.</p>
     <ul class="plist">
-      <li class="reveal"><span class="chip live">En marcha</span><div><b>Panel de Veladero</b><span>Producción, mineral procesado, ley y costos por trimestre, leídos de un CSV que se actualiza con cada informe de Barrick.</span></div><code>Python · pandas · SQLite</code></li>
-      <li class="reveal"><span class="chip sim">Datos simulados</span><div><b>Mantenimiento predictivo en camiones</b><span>Detección de anomalías en vibración, con el umbral de promedio más tres desvíos.</span></div><code>Python · SQL · matplotlib</code></li>
-      <li class="reveal"><span class="chip">En preparación</span><div><b>Vicuña en datos</b><span>Inversión, energía y proveedores del proyecto, con fuentes primarias de BHP y Lundin.</span></div><code>Fuentes primarias</code></li>
-      <li class="reveal"><span class="chip">Próximo</span><div><b>Catastro minero abierto</b><span>Mapa de concesiones con los servicios geográficos del Ministerio de Minería. Pedí confirmar las condiciones de uso antes de publicarlo.</span></div><code>Pendiente del ministerio</code></li>
-      <li class="reveal"><span class="chip">Próximo</span><div><b>Empleo, proveedores y exportaciones</b><span>Las cifras de las distintas notas no coinciden, así que no las publico hasta tener la fuente oficial.</span></div><code>Pendiente del ministerio</code></li>
+      <li><span class="chip live">En marcha</span><div><b>Panel de Veladero</b><span class="desc">Producción, mineral procesado, ley y costos por trimestre, leídos de un CSV que se actualiza con cada informe de Barrick.</span></div><span class="meta">Python, pandas y SQLite</span></li>
+      <li><span class="chip sim">Datos simulados</span><div><b>Mantenimiento predictivo en camiones</b><span class="desc">Detección de anomalías en vibración, con el umbral de promedio más tres desvíos.</span></div><span class="meta">Python, SQL y matplotlib</span></li>
+      <li><span class="chip">En preparación</span><div><b>Vicuña en datos</b><span class="desc">Inversión, energía y proveedores del proyecto, con fuentes primarias de BHP y Lundin.</span></div><span class="meta">Fuentes primarias</span></li>
+      <li><span class="chip">Próximo</span><div><b>Catastro minero abierto</b><span class="desc">Mapa de concesiones con los servicios geográficos del Ministerio de Minería. Pedí confirmar las condiciones de uso antes de publicarlo.</span></div><span class="meta">Espera respuesta del ministerio</span></li>
+      <li><span class="chip">Próximo</span><div><b>Empleo, proveedores y exportaciones</b><span class="desc">Las cifras de las distintas notas no coinciden, así que no las publico hasta tener la fuente oficial.</span></div><span class="meta">Espera respuesta del ministerio</span></li>
     </ul>
   </div>
 </section>
 
-<!-- ============ EMPRESAS ============ -->
-<section id="empresas">
+<!-- ============ GUÍAS ============ -->
+<section id="guias">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Para empresas y proveedores</p>
-      <h2>Qué puedo hacer con tus datos</h2>
+    <div class="sec-head">
+      <h2>Guías para descargar</h2>
+      <p>Lo que mando cuando alguien comenta la palabra clave en los reels, ahora también acá. Cada guía trae sus fuentes y la fecha de la información.</p>
+    </div>
+    <ul class="guides">
+      <li>
+        <div>
+          <h3>Veladero y su ampliación: ficha y RIGI</h3>
+          <p>Ficha de la mina, qué aprobó el RIGI para las fases 8 y 9, qué establece el régimen y cómo viene la producción. En los reels, palabra clave <span class="kw">VELADERO</span> o <span class="kw">RIGI</span>.</p>
+        </div>
+        <div class="dl"><a class="btn ghost small" href="guias/01-veladero-ficha-y-rigi.pdf" download>Descargar PDF</a><small>3 páginas, 13&nbsp;KB</small></div>
+      </li>
+      <li>
+        <div>
+          <h3>Cómo armé el ejemplo de los sensores en camiones</h3>
+          <p>Paso a paso en Python y SQL: simular sensores, resumirlos por día y detectar un camión que se deteriora. Con datos simulados. Palabra clave <span class="kw">SENSORES</span>.</p>
+        </div>
+        <div class="dl"><a class="btn ghost small" href="guias/02-sensores-camiones-paso-a-paso.pdf" download>Descargar PDF</a><small>4 páginas, 117&nbsp;KB</small></div>
+      </li>
+      <li>
+        <div>
+          <h3>Veladero en los informes de Barrick</h3>
+          <p>La tabla trimestral completa, las variaciones, la guía 2026 y cómo encontrar cada cifra en los informes. Palabra clave <span class="kw">BARRICK</span>.</p>
+        </div>
+        <div class="dl"><a class="btn ghost small" href="guias/03-veladero-en-los-informes-de-barrick.pdf" download>Descargar PDF</a><small>4 páginas, 69&nbsp;KB</small></div>
+      </li>
+    </ul>
+    <p class="note">Información al 4 de noviembre de 2026. Las cifras de Veladero del panel pueden ser más nuevas que las de las guías.</p>
+  </div>
+</section>
+
+<!-- ============ EMPRESAS ============ -->
+<section class="alt" id="empresas">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Qué puedo hacer con los datos de tu empresa</h2>
       <p>Si tu empresa tiene planillas, sistemas o sensores con datos que nadie mira, podemos empezar por algo chico y concreto, y ver si sirve antes de ir más lejos.</p>
     </div>
 
     <div class="two">
-      <div class="panel reveal">
+      <div class="panel">
         <h3>Empresas mineras y contratistas</h3>
         <p>Para operaciones y áreas que ya generan datos.</p>
         <ul>
@@ -298,7 +347,7 @@
           <li><b>Pruebas de concepto</b><span>Detección de anomalías y mantenimiento predictivo sobre una muestra de datos de sensores.</span></li>
         </ul>
       </div>
-      <div class="panel reveal">
+      <div class="panel">
         <h3>Proveedores y pymes del sector</h3>
         <p>Para quienes venden bienes y servicios a la minería.</p>
         <ul>
@@ -310,36 +359,34 @@
     </div>
 
     <h3 class="sub-h">Cómo trabajamos</h3>
-    <ol class="steps">
-      <li class="reveal"><b>Una charla</b><span>Me contás qué datos tenés y qué querés resolver.</span></li>
-      <li class="reveal"><b>Una muestra</b><span>Me compartís una parte de los datos, con la confidencialidad que necesites.</span></li>
-      <li class="reveal"><b>Una prueba chica</b><span>Armo un primer resultado concreto: un tablero, un informe o una alerta.</span></li>
-      <li class="reveal"><b>Decidimos juntos</b><span>Si sirve, seguimos. Si no, te quedás con lo que se hizo.</span></li>
+    <ol class="timeline">
+      <li><b>Una charla</b><span>Me contás qué datos tenés y qué querés resolver.</span></li>
+      <li><b>Una muestra</b><span>Me compartís una parte de los datos, con la confidencialidad que necesites.</span></li>
+      <li><b>Una prueba chica</b><span>Armo un primer resultado concreto: un tablero, un informe o una alerta.</span></li>
+      <li><b>Decidimos juntos</b><span>Si sirve, seguimos. Si no, te quedás con lo que se hizo.</span></li>
     </ol>
     <p class="honest">Soy estudiante de Ciencia de Datos en la Universidad Siglo 21 y estoy armando mi experiencia con proyectos propios sobre información pública. Prefiero decirlo de entrada y mostrar el trabajo hecho en esta página.</p>
 
-    <div class="contact reveal" id="contacto">
+    <div class="contact" id="contacto">
       <div>
-        <p class="eyebrow">Contacto</p>
-        <h3>Escribime y vemos si puedo ayudarte</h3>
-        <p class="small" style="margin-top:12px">Contame qué datos tenés y qué querés resolver.</p>
+        <h3>Contame qué datos tenés y qué querés resolver</h3>
+        <p>Respondo por correo. También publico reels sobre estos datos en Instagram, TikTok y LinkedIn.</p>
       </div>
       <div>
         <div class="mailbox">
-          <a class="mail" id="mail" href="mailto:matiasrico21ps@gmail.com?subject=Consulta%20desde%20Miner%C3%ADa%20con%20Datos">matiasrico21ps@gmail.com</a>
-          <button class="btn ghost" id="copy" type="button">Copiar correo</button>
+          <a class="btn primary" href="mailto:matiasrico21ps@gmail.com?subject=Consulta%20desde%20Miner%C3%ADa%20con%20Datos">Escribir un correo</a>
+          <button class="btn ghost" id="copy" type="button" data-mail="matiasrico21ps@gmail.com">Copiar dirección</button>
         </div>
-        <p class="small" style="margin-top:12px">También publico reels sobre estos datos en Instagram, TikTok y LinkedIn.</p>
+        <p class="mailtxt" id="mail">matiasrico21ps@gmail.com</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ CORRECCIONES ============ -->
-<section class="alt" id="correcciones">
+<section id="correcciones">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Registro de correcciones</p>
+    <div class="sec-head">
       <h2>Qué cambié y por qué</h2>
       <p>Cuando una cifra cambia o me equivoco, queda anotado acá.</p>
     </div>
@@ -354,7 +401,8 @@
 
 <footer>
   <div class="wrap">
-    <b style="color:var(--fg)">Minería con Datos</b> · Matías, estudiante de Ciencia de Datos (Universidad Siglo 21), San Juan.
+    <b style="color:var(--fg)" translate="no">Minería con Datos.</b> Un proyecto de Matías, estudiante de Ciencia de Datos (Universidad Siglo 21), San Juan.
+    <p class="motion-foot"><button type="button" class="btn ghost small" data-pausa aria-pressed="false" hidden>Pausar animación</button></p>
     <ul>
       <li>Barrick Mining Corporation, informes trimestrales: <a href="https://www.barrick.com/English/investors/quarterly-reports/default.aspx" target="_blank" rel="noopener">barrick.com/investors</a></li>
       <li>iProfesional, 30/7/2026: <a href="https://www.iprofesional.com/energia/461159-cobre-dolares-y-empleo-los-numeros-detras-del-nuevo-rigi-minero-aprobada-por-el-gobierno" target="_blank" rel="noopener">Vicuña en el RIGI</a></li>

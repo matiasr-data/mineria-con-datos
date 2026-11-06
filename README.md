@@ -8,7 +8,10 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 - `estilos.css`: colores, tipografía y diseño, con modo claro y oscuro automático.
 - `app.js`: dibuja los gráficos y las cifras del panel a partir de `datos/veladero.js`.
 - `datos/veladero.js` y `datos/veladero_trimestral_barrick.csv`: **se generan solos, no editarlos a mano.**
-- `img/vibracion_camiones.png`: gráfico del ejemplo de mantenimiento predictivo (datos simulados).
+- `img/vibracion_camiones.webp` y `.png`: gráfico del ejemplo de mantenimiento predictivo (datos simulados). El navegador usa el WebP, que pesa menos de la mitad.
+- `guias/*.pdf`: las guías descargables. **Se copian solas desde `recursos/`** al correr el script.
+- `404.html`: la página que aparece si alguien entra a una dirección que no existe.
+- `robots.txt` y `sitemap.xml`: para buscadores.
 - `img/compartir.png`: imagen que aparece cuando se comparte el enlace en LinkedIn o WhatsApp.
 
 ## Actualizar el panel cuando Barrick publica un trimestre
@@ -23,6 +26,14 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
    El script revisa el CSV (columnas, números, orden de los trimestres, que la parte de Barrick sea la mitad de la mina completa) y regenera los datos del sitio. Si en la columna `fuente` aparece "contrastar", "confirmar" o "verificar", el trimestre se muestra con línea punteada como pendiente.
 3. Revisar en `index.html` la nota "Cómo leerlo" y, si cambió algo, sumar una línea al registro de correcciones.
 4. Cuando cambie la guía anual o la fecha del próximo informe, actualizar `GUIA` y `PROXIMO` al principio de `app.js`.
+5. Si editaste una guía de `recursos/`, regenerá su PDF antes de correr el script (el script avisa si el markdown es más nuevo que el PDF).
+
+## Detalles útiles
+
+- El gráfico de producción se puede compartir ya filtrado: `?base=barrick` abre la vista de la parte de Barrick (50%).
+- Las curvas de nivel de la portada se dibujan al cargar solo si la persona no pidió movimiento reducido en su sistema. Lo mismo con la animación de las barras.
+- Movimiento del panel (en `app.js`, sección "Movimiento"): cada gráfico se arma una vez cuando se ve el 35%, en orden cronológico, y después queda en bucle (ola en las barras, pulso en las líneas, reflejo en la guía, veta que fluye en la portada). El botón "Pausar animación" (en el panel y en el pie) frena todo y se recuerda en el navegador. Fuera de pantalla o con la pestaña en segundo plano, el bucle se frena solo. Con movimiento reducido, todo queda quieto.
+- Los datos estructurados (schema.org `WebSite` y `Dataset`) están en el `<head>` de `index.html`. El de `Dataset` permite que la tabla de Veladero aparezca en Google Dataset Search; actualizar `temporalCoverage` cuando se sumen trimestres.
 
 ## Verlo en la computadora
 
