@@ -21,6 +21,7 @@
   --violet:var(--violet-600); --violet-dark:var(--violet-700); --vein-glint:var(--gold-100);
   --paper:var(--lav-50); --paper-ink:var(--night-950); --paper-muted:var(--lav-ink);
   --shadow:0 24px 48px -24px rgba(0,0,0,.7);
+  --grid-ink:color-mix(in srgb,var(--night-700) 60%,transparent);
   --font-display:"Anton",Impact,"Arial Narrow",sans-serif;
   --font-body:"Rajdhani","Segoe UI",system-ui,sans-serif;
   --font-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
@@ -141,11 +142,15 @@ p.sub-p{color:var(--muted);max-width:64ch;margin:-8px 0 24px}
 /* ---------- Panel ---------- */
 .empty{border:1px dashed var(--warn);border-radius:var(--radius);padding:18px 20px;display:grid;gap:4px;font-size:15px}
 .empty span{color:var(--muted)}
-.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--fg);margin-bottom:48px}
-.kpi{padding:18px 20px 4px;border-left:1px solid var(--line)}
-.kpi:first-child{border-left:0;padding-left:0}
-@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi:nth-child(3){border-left:0;padding-left:0}.kpi:nth-child(n+3){border-top:1px solid var(--line)}}
-@media (max-width:480px){.kpis{grid-template-columns:1fr}.kpi{border-left:0;padding-left:0}.kpi + .kpi{border-top:1px solid var(--line)}}
+/* Paneles de datos: cada indicador y cada gráfico en su celda, sobre papel cuadriculado (28 px), como los carruseles. */
+.kpis,.chart{background-color:var(--raised);border:1px solid var(--line);border-radius:14px;
+  background-image:linear-gradient(var(--grid-ink) 1px,transparent 1px),linear-gradient(90deg,var(--grid-ink) 1px,transparent 1px);
+  background-size:28px 28px;background-position:-1px -1px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:24px;overflow:hidden}
+.kpi{padding:20px 22px 18px;border-left:1px solid var(--line)}
+.kpi:first-child{border-left:0}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi:nth-child(3){border-left:0}.kpi:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:480px){.kpis{grid-template-columns:1fr}.kpi{border-left:0}.kpi + .kpi{border-top:1px solid var(--line)}}
 .kpi .lbl{font-size:13.5px;color:var(--muted)}
 .kpi .val{font-family:var(--font-display);font-size:44px;font-weight:400;line-height:1.05;margin-top:6px}
 .kpi .val small{font-size:15px;font-weight:500;color:var(--muted);font-family:var(--font-body)}
@@ -156,15 +161,17 @@ p.sub-p{color:var(--muted);max-width:64ch;margin:-8px 0 24px}
 .meter i s{position:absolute;inset:0 auto 0 0;width:35%;background:linear-gradient(90deg,transparent,var(--surface),transparent);opacity:.6;transform:translateX(-100%)}
 .meter b{position:absolute;top:0;bottom:0;width:2px;background:var(--fg)}
 
-.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px}
-.chart{margin:0;min-width:0;border-top:1px solid var(--fg);padding-top:16px}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:24px}
+.chart{margin:0;min-width:0;padding:20px 20px 16px}
+@media (max-width:480px){.chart{padding:16px 14px 14px}.kpi{padding:18px 16px 16px}}
 .chart-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px 16px;flex-wrap:wrap}
 .chart h3{font-size:22px}
 .chart .sub{font-size:13.5px;color:var(--muted);margin:4px 0 14px}
 .chart svg{width:100%;height:auto;display:block;overflow:visible}
 .chart text{font-family:var(--font-mono);fill:var(--muted);font-size:10.5px;font-variant-numeric:tabular-nums}
 .chart text.val{fill:var(--fg);font-size:11.5px;font-weight:700}
-.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .grid,.chart .vgrid{stroke:var(--line);stroke-width:1}
+.chart .vgrid{stroke-dasharray:2 4}
 .chart .base{stroke:var(--muted);stroke-width:1}
 .chart .bar{fill:var(--bar);transform-box:fill-box;transform-origin:50% 100%}
 .chart .bar.pending{fill:var(--bar-soft);stroke:var(--bar);stroke-dasharray:4 3;stroke-width:1.5}

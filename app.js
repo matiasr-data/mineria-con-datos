@@ -135,6 +135,8 @@
     var bw = g.iw / D.length, pairs = [];
     D.forEach(function (d, i) {
       var cx = g.L + bw * i + bw / 2, w = Math.min(44, bw * 0.6), v = d[key];
+      /* Línea vertical de la grilla, una por trimestre, detrás de la barra. */
+      el("line", { x1: cx, x2: cx, y1: g.T, y2: g.Y(0), "class": "vgrid" }, svg);
       txt(cx, H - 12, d.q, { "text-anchor": "middle" }, svg);
       if (v == null) {
         txt(cx, g.Y(0) - 10, "sin dato", { "text-anchor": "middle" }, svg);
@@ -215,6 +217,8 @@
     D.forEach(function (d, i) { if (d[key] != null) { if (firstI < 0) firstI = i; lastI = i; } });
     D.forEach(function (d, i) {
       var v = d[key];
+      /* Línea vertical de la grilla, detrás de la línea de datos. */
+      svg.insertBefore(el("line", { x1: X(i), x2: X(i), y1: g.T, y2: g.Y(lo), "class": "vgrid" }), plot);
       txt(X(i), H - 12, d.q, { "text-anchor": "middle" }, svg);
       if (v == null) {
         txt(X(i), g.Y(lo) - 10, "sin dato", { "text-anchor": "middle" }, svg);
