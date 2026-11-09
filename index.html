@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500;700&family=Rajdhani:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="estilos.css?v=12db1e30">
+<link rel="stylesheet" href="estilos.css?v=bbaad67c">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -82,6 +82,7 @@
   <svg class="sierra" id="sierra" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
   <svg class="contour" id="contour" viewBox="0 0 760 460" preserveAspectRatio="xMaxYMid slice" aria-hidden="true"></svg>
   <div class="wrap hero-main">
+   <div class="hero-texto">
     <p class="pastilla">Ciencia de datos · Minería · San Juan</p>
     <h1>Los datos de la minería sanjuanina, <span class="clave">claros y con fuente.</span></h1>
     <!-- La palabra grande rota entre los cuatro temas de la franja de cifras. Es decorativa: las cifras están en la franja. -->
@@ -94,6 +95,14 @@
     <div class="coords">
       <span>29°24′S · 69°55′O — Veladero, Iglesia, San Juan</span>
     </div>
+   </div>
+   <!-- Mapa interactivo de los proyectos metalíferos de San Juan (SIACAM). Lo dibuja app.js con datos/proyectos.js. -->
+   <figure class="hero-mapa" id="hero-mapa" aria-label="Mapa de los proyectos metalíferos de San Juan según el SIACAM">
+    <p class="mapa-titulo"><b id="mapa-total">33</b> proyectos metalíferos en San Juan</p>
+    <div class="mapa-escena"><div class="mapa-plano" id="mapa-plano"><svg id="mapa-svg" viewBox="0 0 400 560" aria-hidden="true"></svg></div></div>
+    <div class="mapa-ficha" id="mapa-ficha"></div>
+    <figcaption class="mapa-pie"><span class="ley"><i class="g-prod"></i>En producción</span><span class="ley"><i class="g-avan"></i>Avanzados</span><span class="ley"><i class="g-expl"></i>En exploración</span><span class="mapa-fuente">Fuente: SIACAM, Secretaría de Minería de la Nación (datos.gob.ar, 9/11/2026)</span></figcaption>
+   </figure>
   </div>
   <div class="wrap">
     <dl class="franja" id="franja">
@@ -469,7 +478,8 @@
 <div class="tip" id="tip" aria-hidden="true"></div>
 
 <script src="datos/veladero.js?v=e9d85133"></script>
+<script src="datos/proyectos.js?v=ec5bc9ed"></script>
 <script src="datos/publicaciones.js?v=66b2a430"></script>
-<script src="app.js?v=bcf40b69"></script>
+<script src="app.js?v=56e8076f"></script>
 </body>
 </html>

@@ -182,12 +182,14 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 .hero.noche svg.contour{-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 45%,#000 80%);mask-image:linear-gradient(90deg,transparent 0,transparent 45%,#000 80%)}
 .hero.noche .contour path.vein{stroke:var(--gold-400);opacity:.75}
 .hero.noche > .wrap{width:100%}
-.hero-main{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:28px}
+.hero-main{position:relative;flex:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:24px 40px;align-items:center;padding-bottom:28px}
+.hero-texto{display:flex;flex-direction:column;justify-content:center;min-width:0}
+@media (max-width:980px){.hero-main{grid-template-columns:1fr}}
 .pastilla{align-self:flex-start;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg);background:rgba(11,6,20,.55);border:1px solid var(--line);border-radius:99px;padding:8px 16px;margin-bottom:18px;
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .hero.noche h1{font-size:clamp(26px,3.4vw,40px);max-width:30ch;line-height:1.08}
-.rota{font-family:var(--font-display);font-weight:400;font-size:clamp(72px,12.5vw,150px);line-height:.92;margin:8px 0 16px;color:#fff;
+.rota{font-family:var(--font-display);font-weight:400;font-size:clamp(68px,8.6vw,126px);line-height:.92;margin:8px 0 16px;color:#fff;
   letter-spacing:-.005em;white-space:nowrap}
 .rota i{font-style:normal;color:var(--acento)}
 .rota span{display:inline-block;will-change:transform,filter,opacity}
@@ -212,6 +214,57 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 @media (max-width:420px){.franja > div{padding:14px 14px 12px}}
 @media (max-width:560px){.hero.noche{padding-top:36px;min-height:0}.coords{margin-top:24px}.pastilla{font-size:11px;letter-spacing:.08em;padding:7px 12px}}
 .intro{padding-block:8px 0}
+
+/* ---------- Portada: mapa de los proyectos ----------
+   Los proyectos metalíferos del SIACAM sobre un plano inclinado en 3D, con su latitud y longitud reales.
+   Recorre los proyectos más avanzados uno por uno; al pasar el mouse el plano se inclina y cada punto muestra su ficha. */
+.hero-mapa{position:relative;margin:0;min-width:0;display:flex;flex-direction:column;gap:6px}
+.mapa-titulo{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.mapa-titulo b{font-family:var(--font-display);font-weight:400;font-size:30px;color:#fff;letter-spacing:0;margin-right:4px;vertical-align:-3px}
+.mapa-escena{height:clamp(270px,25vw,340px);perspective:1000px;perspective-origin:50% 45%;display:grid;place-items:center}
+.mapa-plano{width:min(100%,300px);aspect-ratio:400/560;transform:translateY(-44px) rotateX(52deg) rotateZ(-14deg);transform-style:preserve-3d;
+  transition:transform .6s var(--ease-out);border-radius:18px;
+  background:radial-gradient(circle at 50% 40%,rgba(124,58,237,.30),transparent 70%),rgba(20,11,36,.55);
+  border:1px solid rgba(185,162,255,.30);box-shadow:0 40px 60px -30px rgba(0,0,0,.9)}
+.mapa-plano svg{width:100%;height:100%;display:block;overflow:visible}
+.mapa-plano .grat{stroke:rgba(185,162,255,.18);stroke-width:1}
+.mapa-plano .grat-l{font-family:var(--font-mono);font-size:11px;fill:rgba(241,238,251,.55)}
+.mapa-plano .pt{cursor:pointer;transition:r .25s,opacity .25s}
+.mapa-plano .pt.g-prod{fill:var(--acento)}
+.mapa-plano .pt.g-avan{fill:#B9A2FF}
+.mapa-plano .pt.g-expl{fill:rgba(241,238,251,.55)}
+.mapa-plano .pt.on{stroke:#fff;stroke-width:2}
+.mapa-plano .pulso{fill:none;stroke:var(--acento);stroke-width:2;transform-box:fill-box;transform-origin:center;opacity:0}
+@media (prefers-reduced-motion: no-preference){
+  .mapa-plano .pulso{animation:pulso 1.8s ease-out infinite}
+}
+@keyframes pulso{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+.mapa-ficha{min-height:108px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(11,6,20,.6);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:start}
+.mf-estado{font-family:var(--font-mono);font-size:11.5px}
+.mf-estado.g-prod{color:var(--acento)} .mf-estado.g-avan{color:#C9B6FF} .mf-estado.g-expl{color:var(--muted)}
+.mf-nombre{font-family:var(--font-display);font-size:26px;line-height:1.05;color:#fff;grid-column:1}
+.mf-det{font-size:14px;color:var(--muted);grid-column:1}
+.mf-nota{font-size:12.5px;color:var(--muted);grid-column:1 / -1;font-style:italic}
+.mf-nav{grid-column:2;grid-row:1 / span 2;display:flex;gap:6px;align-items:center}
+.mf-nav button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;cursor:pointer;font-size:16px;line-height:1;
+  transition:transform .2s var(--ease-out),border-color .2s}
+.mf-nav span{font-family:var(--font-mono);font-size:11px;color:var(--muted);min-width:36px;text-align:center}
+@media (hover:hover) and (pointer:fine){.mf-nav button:hover{transform:scale(1.1);border-color:var(--acento)}}
+.mapa-pie{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
+.mapa-pie .ley{display:inline-flex;align-items:center;gap:6px}
+.mapa-pie .ley i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.mapa-pie i.g-prod{background:var(--acento)} .mapa-pie i.g-avan{background:#B9A2FF} .mapa-pie i.g-expl{background:rgba(241,238,251,.55)}
+.mapa-fuente{flex-basis:100%;font-family:var(--font-mono);font-size:10.5px;opacity:.85}
+@media (max-width:980px){.mapa-escena{height:270px}.mapa-plano{width:min(100%,250px)}.hero-mapa{max-width:520px}}
+
+/* ---------- Menú: zoom en la opción bajo el mouse, las demás se desvanecen ---------- */
+nav a{display:inline-block;transition:transform .25s var(--ease-out),opacity .2s,color .2s,border-color .2s}
+@media (hover:hover) and (pointer:fine){
+  nav:hover a{opacity:.5}
+  nav a:hover{opacity:1;transform:scale(1.08)}
+}
+@media (prefers-reduced-motion: reduce){nav a:hover{transform:none}}
 
 /* ---------- Secciones ---------- */
 section{padding-block:80px}

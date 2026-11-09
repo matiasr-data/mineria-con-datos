@@ -478,6 +478,72 @@
   }
 
 
+  /* ---------- Portada: mapa de los proyectos del SIACAM ----------
+     Cada punto está en su latitud y longitud reales (proyección simple, corregida por la latitud).
+     Recorre los proyectos más avanzados cada 3,8 s; al pasar el mouse por un punto muestra ese proyecto y el
+     plano se inclina siguiendo el mouse. Se frena con el mouse encima, fuera de pantalla y con movimiento reducido. */
+  var mapaFig = document.getElementById("hero-mapa"), PROY = window.PROYECTOS || [];
+  if (mapaFig && PROY.length) {
+    var msvg = document.getElementById("mapa-svg"), plano = document.getElementById("mapa-plano"), mficha = document.getElementById("mapa-ficha");
+    document.getElementById("mapa-total").textContent = PROY.length;
+    var MW = 400, MH = 560, MP = 40;
+    var lats = PROY.map(function (p) { return p.lat; }), lons = PROY.map(function (p) { return p.lon; });
+    var la0 = Math.min.apply(null, lats), la1 = Math.max.apply(null, lats), lo0 = Math.min.apply(null, lons), lo1 = Math.max.apply(null, lons);
+    var kx = Math.cos((la0 + la1) / 2 * Math.PI / 180);
+    var esc4 = Math.min((MW - 2 * MP) / ((lo1 - lo0) * kx), (MH - 2 * MP) / (la1 - la0));
+    var ox = (MW - (lo1 - lo0) * kx * esc4) / 2, oy = (MH - (la1 - la0) * esc4) / 2;
+    function mx(lon) { return ox + (lon - lo0) * kx * esc4; }
+    function my(lat) { return oy + (la1 - lat) * esc4; }
+    /* Cuadrícula de medio grado, con rótulos en los grados enteros. */
+    for (var gl = Math.ceil(la0 * 2) / 2; gl <= la1; gl += 0.5) {
+      el("line", { x1: 8, x2: MW - 8, y1: my(gl), y2: my(gl), "class": "grat" }, msvg);
+      if (gl % 1 === 0) txt(12, my(gl) - 5, Math.abs(gl) + "°S", { "class": "grat-l" }, msvg);
+    }
+    for (var gn = Math.ceil(lo0 * 2) / 2; gn <= lo1; gn += 0.5) {
+      el("line", { x1: mx(gn), x2: mx(gn), y1: 8, y2: MH - 8, "class": "grat" }, msvg);
+      if (gn % 1 === 0) txt(mx(gn) + 4, MH - 14, Math.abs(gn) + "°O", { "class": "grat-l" }, msvg);
+    }
+    var pulso = el("circle", { r: 9, "class": "pulso" }, msvg);
+    var R = { prod: 8, avan: 6, expl: 4 };
+    var orden = { expl: 0, avan: 1, prod: 2 };
+    var puntos = PROY.map(function (p, i) { return i; }).sort(function (a, b) { return orden[PROY[a].grupo] - orden[PROY[b].grupo]; }).map(function (i) {
+      var p = PROY[i], c = el("circle", { cx: mx(p.lon), cy: my(p.lat), r: R[p.grupo], "class": "pt g-" + p.grupo }, msvg);
+      c._i = i; return c;
+    });
+    var porIndice = {}; puntos.forEach(function (c) { porIndice[c._i] = c; });
+    var DESTACADOS = ["Veladero", "Gualcamayo / Carbonatos Profundos", "Casposo", "Vicuña", "Los Azules", "El Pachón", "Hualilán", "Altar", "Taguas"]
+      .map(function (n) { for (var k = 0; k < PROY.length; k++) if (PROY[k].n === n) return k; return -1; })
+      .filter(function (k) { return k >= 0; });
+    var di = 0, sobreMapa = false, mapaVis = true, marcado = null;
+    function mostrar(i, enSecuencia) {
+      var p = PROY[i];
+      if (marcado) marcado.classList.remove("on");
+      marcado = porIndice[i]; marcado.classList.add("on");
+      pulso.setAttribute("cx", mx(p.lon)); pulso.setAttribute("cy", my(p.lat)); pulso.setAttribute("r", R[p.grupo] + 2);
+      var emp = p.empresas.length ? p.empresas.join(" y ") : "Sin dato de empresa";
+      mficha.innerHTML = '<p class="mf-estado g-' + p.grupo + '">' + p.estado + "</p>" +
+        '<div class="mf-nav">' + (enSecuencia ? '<button type="button" data-d="-1" aria-label="Proyecto anterior">‹</button><span>' + (di + 1) + "/" + DESTACADOS.length + '</span><button type="button" data-d="1" aria-label="Proyecto siguiente">›</button>' : "") + "</div>" +
+        '<p class="mf-nombre">' + p.n + "</p>" +
+        '<p class="mf-det">' + p.mineral + " · " + emp + "</p>" +
+        (p.nota ? '<p class="mf-nota">' + p.nota + "</p>" : "");
+    }
+    function avanzar(d) { di = (di + d + DESTACADOS.length) % DESTACADOS.length; mostrar(DESTACADOS[di], true); }
+    mficha.addEventListener("click", function (e) { var b = e.target.closest("button[data-d]"); if (b) avanzar(+b.getAttribute("data-d")); });
+    msvg.addEventListener("pointerover", function (e) { if (e.target._i !== undefined) mostrar(e.target._i, false); });
+    msvg.addEventListener("pointerout", function (e) { if (e.target._i !== undefined) mostrar(DESTACADOS[di], true); });
+    /* Inclinación con el mouse: el plano sigue al puntero unos pocos grados. */
+    mapaFig.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse" || still()) return;
+      var b = mapaFig.getBoundingClientRect(), rx = (e.clientX - b.left) / b.width - 0.5, ry = (e.clientY - b.top) / b.height - 0.5;
+      plano.style.transform = "translateY(-44px) rotateX(" + (52 - ry * 14).toFixed(1) + "deg) rotateZ(" + (-14 + rx * 18).toFixed(1) + "deg)";
+    });
+    mapaFig.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") sobreMapa = true; });
+    mapaFig.addEventListener("pointerleave", function () { sobreMapa = false; plano.style.transform = ""; });
+    if (HAS_IO) new IntersectionObserver(function (es) { mapaVis = es[0].isIntersecting; }).observe(mapaFig);
+    mostrar(DESTACADOS[0] !== undefined ? DESTACADOS[0] : 0, true);
+    setInterval(function () { if (!still() && !sobreMapa && mapaVis && !document.hidden) avanzar(1); }, 3800);
+  }
+
   /* ---------- Publicaciones: óvalo 3D ----------
      Las tarjetas salen de datos/publicaciones.js (lo genera actualizar_web.py desde comunidad/publicaciones.csv).
      Cada tarjeta tiene un ángulo en el óvalo; el giro cambia un solo número (ang) y cada cuadro se recalcula la
