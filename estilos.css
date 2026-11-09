@@ -482,6 +482,33 @@ footer li{margin-bottom:4px;overflow-wrap:anywhere}
   nav a{white-space:nowrap}
 }
 
+/* ---------- Al pasar el mouse por lo que se puede tocar ----------
+   Botones: crecen un poco y suben (zoom) con una sombra violeta; al hacer clic se hunden.
+   Links de texto: se desvanecen. Las flechas del óvalo también crecen. Solo con mouse (en el celular no hay hover).
+   Con movimiento reducido no hay zoom: quedan los cambios de color y de opacidad. */
+.btn{transition:transform .28s var(--ease-out),box-shadow .28s var(--ease-out),border-color .2s,background-color .25s,color .2s}
+.vit-flecha{transition:transform .25s var(--ease-out),border-color .2s,background-color .2s}
+.aud{transition:transform .3s var(--ease-out)}
+main a:not(.btn):not(.aud),footer a{transition:opacity .2s,color .2s}
+.seg button,summary{transition:background-color .2s,color .2s}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 14px 28px -14px rgba(91,33,182,.65)}
+  .btn.ghost:hover{background:rgba(124,58,237,.10)}
+  .btn.linea:hover{background:rgba(255,255,255,.10)}
+  .btn:active{transform:translateY(0) scale(.97);box-shadow:0 6px 14px -10px rgba(91,33,182,.6)}
+  .vit-flecha:hover{transform:scale(1.1)}
+  .vit-flecha:active{transform:scale(.95)}
+  .aud:hover{transform:translateY(-3px)}
+  main a:not(.btn):not(.aud):hover,footer a:hover{opacity:.68}
+  .ficha-link:hover{opacity:1}
+  .seg button:not([aria-pressed="true"]):hover{background:rgba(124,58,237,.14);color:var(--fg)}
+  summary:hover{background:rgba(124,58,237,.08)}
+  .oc:hover{border-color:var(--acento)}
+}
+@media (prefers-reduced-motion: reduce){
+  .btn:hover,.btn:active,.vit-flecha:hover,.vit-flecha:active,.aud:hover{transform:none}
+}
+
 /* ---------- Movimiento reducido: sin desplazamientos; quedan los fundidos cortos y el foco ---------- */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
