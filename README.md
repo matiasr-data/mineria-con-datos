@@ -33,15 +33,15 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 - El gráfico de producción se puede compartir ya filtrado: `?base=barrick` abre la vista de la parte de Barrick (50%).
 - Portada de noche: la palabra grande rota entre "Oro", "Dólares", "Empleo" y "Proyectos" y marca la columna de la franja de cifras que le corresponde. La cifra de oro sale sola del CSV; las otras tres (exportaciones 2025, puestos de junio de 2026 y proyectos del SIACAM) están escritas en `index.html` y se actualizan a mano cuando salga un dato nuevo. La sierra del fondo se dibuja con código; para usar una foto propia, ver "Portada de noche" en `estilos.css`.
 - Las curvas de nivel de la portada se dibujan al cargar solo si la persona no pidió movimiento reducido en su sistema. Lo mismo con la animación de las barras.
-- Movimiento del panel (en `app.js`, sección "Movimiento"): cada gráfico se arma una vez cuando se ve el 35%, en orden cronológico, y después queda en bucle (ola en las barras, pulso en las líneas, reflejo en la guía, veta que fluye en la portada). El botón "Pausar animación" (en el panel y en el pie) frena todo y se recuerda en el navegador. Fuera de pantalla o con la pestaña en segundo plano, el bucle se frena solo. Con movimiento reducido, todo queda quieto.
+- Movimiento del panel (en `app.js`, sección "Movimiento"): cada gráfico se arma una vez cuando se ve el 35%, en orden cronológico, y después queda en bucle (ola en las barras, pulso en las líneas, reflejo en la guía, veta que fluye en la portada). No hay botón de pausa (se sacó a pedido el 9/11/2026). Fuera de pantalla o con la pestaña en segundo plano, el bucle se frena solo. Con movimiento reducido, todo queda quieto.
 - Los datos estructurados (schema.org `WebSite` y `Dataset`) están en el `<head>` de `index.html`. El de `Dataset` permite que la tabla de Veladero aparezca en Google Dataset Search; actualizar `temporalCoverage` cuando se sumen trimestres.
 
 ## Vitrina de reels
 
 - La lista está en `comunidad/publicaciones.csv` (fuera de esta carpeta). Una fila por reel: archivo de video, segundo de la miniatura (`portada_seg`), estado (`publicado`, `proximo` u `oculto`), fecha, título, gancho, tema, palabra clave y link de Instagram.
-- Cuando subas un reel: cambiá su estado a `publicado`, poné la fecha (AAAA-MM-DD) y pegá el link del posteo en `url`. Sin link, el botón lleva al perfil.
+- Cuando subas un reel: cambiá su estado a `publicado`, poné la fecha (AAAA-MM-DD) y pegá el link del posteo en `url`. Sin link, el botón lleva al perfil. Los próximos no llevan link: para seguir la cuenta está el botón de abajo de la vitrina.
 - `python herramientas/actualizar_web.py` recorta solo el avance (6 s, sin sonido, 540 px) y la miniatura de cada reel en `reels/`, y genera `datos/publicaciones.js`. Necesita ffmpeg. Solo rehace un avance si el video original cambió.
-- En la página se reproduce un solo avance a la vez: el de la tarjeta bajo el mouse, o la primera que está entera a la vista. No se reproduce solo con el botón de pausa, con movimiento reducido ni fuera de pantalla.
+- En la página se reproduce un solo avance a la vez: el de la tarjeta bajo el mouse, o la primera que está entera a la vista. No se reproduce solo con movimiento reducido ni fuera de pantalla.
 
 ## Verlo en la computadora
 

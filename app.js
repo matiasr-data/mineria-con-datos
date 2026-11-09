@@ -41,8 +41,10 @@
      Con movimiento reducido todo queda armado y quieto. */
   var E_OUT = "cubic-bezier(.16,1,.3,1)";
   var PAUSA = "mcd-pausa";
+  /* Ya no hay botón de pausa: el movimiento se frena solo con movimiento reducido, fuera de pantalla
+     o con la pestaña oculta. Se borra la pausa que haya quedado guardada de cuando existía el botón. */
   var paused = false;
-  try { paused = localStorage.getItem(PAUSA) === "1"; } catch (e) { /* sin almacenamiento: arranca en movimiento */ }
+  try { localStorage.removeItem(PAUSA); } catch (e) { /* sin almacenamiento: no hay nada que borrar */ }
   var HAS_IO = "IntersectionObserver" in window;
   var armed = [];
   function still() { return REDUCE.matches || !Element.prototype.animate; }
@@ -499,9 +501,10 @@
         "<h3>" + esc(p.titulo) + "</h3>" +
         '<p class="reel-gancho">' + esc(p.gancho) + "</p>" +
         (pub && p.palabra_clave ? '<p class="reel-kw">Comentá ' + esc(p.palabra_clave) + "</p>" : "") +
-        '<a class="reel-link" href="' + esc(p.url || IGURL) + '" target="_blank" rel="noopener">' +
-        (pub ? (p.url ? "Ver en Instagram" : "Verlo en Instagram") : "Seguir la cuenta") +
-        '<span class="sr-only">: ' + esc(p.titulo) + "</span></a></article>";
+        /* Los próximos no llevan link: para seguir la cuenta está el botón de abajo de la vitrina. */
+        (pub ? '<a class="reel-link" href="' + esc(p.url || IGURL) + '" target="_blank" rel="noopener">Ver en Instagram' +
+          '<span class="sr-only">: ' + esc(p.titulo) + "</span></a>" : "") +
+        "</article>";
     }).join("");
     var cards = Array.prototype.slice.call(vit.children), vitVis = false, hoverCard = null, ratios = new Map();
     function videoDe(c) {
@@ -545,7 +548,7 @@
       new IntersectionObserver(function (es) { vitVis = es[0].isIntersecting; vitSync(); }, { threshold: 0.4 }).observe(vit);
     }
     document.addEventListener("visibilitychange", vitSync);
-    document.querySelectorAll("[data-pausa]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(vitSync, 0); }); });
+    if (REDUCE.addEventListener) REDUCE.addEventListener("change", vitSync);
     /* Flechas: avanzan de a una tarjeta y se apagan en las puntas. */
     var flechas = Array.prototype.slice.call(document.querySelectorAll(".vit-flecha"));
     function puntas() {
@@ -563,26 +566,8 @@
     puntas();
   }
 
-  /* ---------- Botón de pausa (panel y pie): frena todos los bucles y se recuerda en este navegador ---------- */
-  var pauseBtns = Array.prototype.slice.call(document.querySelectorAll("[data-pausa]"));
-  function syncPause() {
-    document.documentElement.classList.toggle("quieto", paused);
-    pauseBtns.forEach(function (b) {
-      b.hidden = REDUCE.matches;
-      b.setAttribute("aria-pressed", paused ? "true" : "false");
-      b.textContent = paused ? "Reanudar animación" : "Pausar animación";
-    });
-  }
-  pauseBtns.forEach(function (b) {
-    b.addEventListener("click", function () {
-      paused = !paused;
-      try { localStorage.setItem(PAUSA, paused ? "1" : "0"); } catch (e) { /* sin almacenamiento: vale solo para esta visita */ }
-      syncPause(); syncAll();
-    });
-  });
-  syncPause();
+  /* Si la persona activa el movimiento reducido con la página abierta, se frena todo en el momento. */
   if (REDUCE.addEventListener) REDUCE.addEventListener("change", function () {
-    syncPause();
     if (REDUCE.matches) { armed.forEach(clearLoops); if (rotaW) { rotaW.textContent = PALABRAS[0]; marcar(-1); } }
   });
 
