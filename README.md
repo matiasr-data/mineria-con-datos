@@ -4,7 +4,7 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 
 ## Archivos
 
-- `index.html`: la página, con estas secciones: inicio, panel de Veladero, casos de uso, proyectos, para empresas y proveedores, y registro de correcciones.
+- `index.html`: la página, con estas secciones: inicio, panel de Veladero, casos de uso, proyectos, reels y carruseles, para empresas y proveedores, y contacto.
 - `estilos.css`: colores, tipografía y diseño. Versión clara de la marca de los carruseles (lavanda cuadriculado, violeta y oro); `.clave` es la palabra clave de cada título (violeta con subrayado fino dorado) y `.subra` el subrayado dorado a mano del texto.
 - `app.js`: dibuja los gráficos y las cifras del panel a partir de `datos/veladero.js`.
 - `datos/veladero.js` y `datos/veladero_trimestral_barrick.csv`: **se generan solos, no editarlos a mano.**
@@ -24,7 +24,7 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
    ```
 
    El script revisa el CSV (columnas, números, orden de los trimestres, que la parte de Barrick sea la mitad de la mina completa) y regenera los datos del sitio. Si en la columna `fuente` aparece "contrastar", "confirmar" o "verificar", el trimestre se muestra con línea punteada como pendiente.
-3. Revisar en `index.html` la nota "Cómo leerlo" y, si cambió algo, sumar una línea al registro de correcciones.
+3. Revisar en `index.html` la nota "Cómo leerlo" del panel.
 4. Cuando cambie la guía anual o la fecha del próximo informe, actualizar `GUIA` y `PROXIMO` al principio de `app.js`.
 5. Si editaste una guía de `recursos/`, regenerá su PDF antes de correr el script (el script avisa si el markdown es más nuevo que el PDF).
 
