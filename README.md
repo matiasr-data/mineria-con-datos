@@ -39,7 +39,7 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 
 ## Publicaciones (óvalo 3D)
 
-- La sección "Reels y carruseles, en movimiento" muestra todas las publicaciones girando en un óvalo. La de adelante reproduce su avance sin sonido y abajo aparece su ficha (tipo, estado, tema, gancho, palabra clave y link).
+- La sección "Vista previa de nuestro Instagram" muestra todas las publicaciones girando en un óvalo. La de adelante reproduce su avance sin sonido y abajo aparece su ficha (tipo, estado, tema, gancho, palabra clave y link).
 - La lista está en `comunidad/publicaciones.csv` (fuera de esta carpeta). Una fila por publicación: `tipo` (`reel` o `carrusel`), archivo de video (para los carruseles, el `01.mp4`), segundo de la miniatura (`portada_seg`; en los carruseles, 0), estado (`publicado`, `proximo` u `oculto`), fecha, título, gancho, tema, palabra clave y link de Instagram. El orden del archivo es el orden del óvalo.
 - Cuando subas algo: cambiá su estado a `publicado`, poné la fecha (AAAA-MM-DD) y pegá el link del posteo en `url`. Sin link, la ficha lleva al perfil.
 - `python herramientas/actualizar_web.py` recorta solo el avance (6 s, sin sonido, 540 px) y la miniatura de cada una en `reels/`, y genera `datos/publicaciones.js`. Necesita ffmpeg. Solo rehace un avance si el video original cambió.
