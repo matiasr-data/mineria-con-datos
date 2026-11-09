@@ -1,39 +1,44 @@
 /* Minería con Datos
-   Concepto: la misma marca que los carruseles (estilo "Sistema"). Noche violeta de fondo, un halo
-   violeta en la portada y el oro como único acento: las barras, las líneas y la veta de las curvas de nivel.
-   Una sola apariencia oscura, elegida a propósito (igual que los carruseles), para todos los visitantes.
-   Tipografía: Anton en mayúsculas para títulos y cifras grandes, Rajdhani para el texto,
-   JetBrains Mono para rótulos chicos y ejes de los gráficos. */
+   Concepto: la versión clara de la marca de los carruseles (estilo "Sistema"): papel lavanda cuadriculado,
+   tinta noche, el violeta como color de los datos y luces doradas desenfocadas en la portada.
+   El oro no se usa para texto (no llega al contraste sobre lavanda): queda para los subrayados a mano y las luces.
+   Tipografía: Anton en mayúsculas para títulos y cifras grandes, Caveat (manuscrita, en minúscula y violeta)
+   para la palabra clave de cada título, Rajdhani para el texto y JetBrains Mono para rótulos y ejes. */
 
 /* ---------- Tokens: capa base (valores) ---------- */
 :root{
   --night-950:#0B0614; --night-900:#140B24; --night-800:#1E1333; --night-700:#2E2147;
   --lav-50:#EFE9FA; --lav-100:#F1EEFB; --lav-400:#A99CC6; --lav-ink:#4B3A6B;
-  --violet-600:#7C3AED; --violet-700:#6D28D9;
+  --violet-600:#7C3AED; --violet-700:#6D28D9; --violet-200:#DDD0F8;
+  --lav-200:#D8CDEE; --lav-muted:#5B4E78; --white:#FFFFFF; --tint:#F7F3FE;
+  --green-700:#0F7A4D; --red-700:#B4361F;
   --gold-400:#F2C84B; --gold-900:#4A3A12; --gold-100:#FFE9A8;
   --mint-300:#6FD8A3; --coral-300:#FF9B8A;
 }
 
 /* ---------- Tokens: capa de uso (lo que consumen los componentes) ---------- */
 :root{
-  --bg:var(--night-950); --surface:var(--night-900); --raised:var(--night-800); --fg:var(--lav-100); --muted:var(--lav-400); --line:var(--night-700);
-  --accent:var(--gold-400); --bar:var(--gold-400); --bar-soft:var(--gold-900); --good:var(--mint-300); --warn:var(--coral-300);
-  --violet:var(--violet-600); --violet-dark:var(--violet-700); --vein-glint:var(--gold-100);
-  --paper:var(--lav-50); --paper-ink:var(--night-950); --paper-muted:var(--lav-ink);
-  --shadow:0 24px 48px -24px rgba(0,0,0,.7);
-  --grid-ink:color-mix(in srgb,var(--night-700) 60%,transparent);
+  --bg:var(--lav-50); --surface:var(--tint); --raised:var(--white); --fg:#150A24; --muted:var(--lav-muted); --line:var(--lav-200);
+  --accent:var(--violet-700); --bar:var(--violet-600); --bar-soft:var(--violet-200); --good:var(--green-700); --warn:var(--red-700);
+  --violet:var(--violet-600); --violet-dark:var(--violet-700); --vein-glint:var(--gold-400); --marker:var(--gold-400);
+  /* La tarjeta de contacto va al revés: noche con texto claro, como los slides oscuros de los carruseles. */
+  --paper:var(--night-950); --paper-ink:var(--lav-100); --paper-muted:var(--lav-400);
+  --shadow:0 24px 48px -28px rgba(60,30,120,.35);
+  --grid-ink:color-mix(in srgb,var(--violet-600) 9%,transparent);
+  --font-hand:"Caveat","Segoe Print","Bradley Hand",cursive;
   --font-display:"Anton",Impact,"Arial Narrow",sans-serif;
   --font-body:"Rajdhani","Segoe UI",system-ui,sans-serif;
   --font-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
   --ease-out:cubic-bezier(.16,1,.3,1);
   --radius:10px;
-  color-scheme:dark;
+  color-scheme:light;
 }
 
 /* ---------- Base ---------- */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;font-weight:500;line-height:1.55;margin:0;position:relative;
+body{background-color:var(--bg);color:var(--fg);
+  background-image:linear-gradient(var(--grid-ink) 1px,transparent 1px),linear-gradient(90deg,var(--grid-ink) 1px,transparent 1px);background-size:28px 28px;font-family:var(--font-body);font-size:17px;font-weight:500;line-height:1.55;margin:0;position:relative;
   font-variant-numeric:tabular-nums;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:1080px;margin-inline:auto}
@@ -44,6 +49,15 @@ h1,h2,h3,h4{line-height:1.1;margin:0;text-wrap:balance}
 h1,h2{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.02}
 h3,h4{font-family:var(--font-body);font-weight:700;letter-spacing:0}
 p{margin:0;text-wrap:pretty}
+/* La palabra clave de cada título, escrita a mano en minúscula grande y violeta. */
+.mano{font-family:var(--font-hand);font-weight:700;text-transform:none;letter-spacing:0;color:var(--violet);font-size:1.18em;line-height:.85;white-space:nowrap;margin-inline:.06em}
+.mano.linea{display:block;font-size:1.05em;margin-top:.06em;white-space:normal}
+/* Subrayado dorado a mano debajo de las palabras importantes del texto. Se dibuja al entrar en pantalla. */
+.subra{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C38 4.5 74 11 112 7.2S170 4 197 8' fill='none' stroke='%23F2C84B' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 100% / 100% .5em;padding-bottom:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;color:var(--fg)}
+@media (prefers-reduced-motion: no-preference){
+  html.trazo .subra{transition:background-size .9s var(--ease-out)}
+  html.trazo .subra:not(.on){background-size:0% .5em}
+}
 code{font-family:var(--font-mono);font-size:.84em}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 button,.btn{touch-action:manipulation}
@@ -78,9 +92,15 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 /* El halo violeta de los carruseles, detrás de las curvas de nivel. La portada ocupa todo el ancho. */
 .hero{position:relative;overflow:hidden;padding-block:80px 56px;
   margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));
-  background:radial-gradient(55% 75% at 82% 18%,color-mix(in srgb,var(--violet) 42%,transparent),transparent 72%),radial-gradient(40% 50% at 10% 100%,color-mix(in srgb,var(--violet) 16%,transparent),transparent 70%)}
-.hero svg.contour{position:absolute;right:-80px;top:0;width:min(760px,95%);height:100%;pointer-events:none}
-.contour path{fill:none;stroke:var(--line);stroke-width:1.2}
+  /* Luces desenfocadas como el bokeh de los carruseles: dos violetas y dos doradas. */
+  background:
+    radial-gradient(circle at 8% 16%,color-mix(in srgb,var(--violet) 26%,transparent) 0,transparent 15%),
+    radial-gradient(circle at 93% 22%,color-mix(in srgb,var(--marker) 45%,transparent) 0,transparent 9%),
+    radial-gradient(circle at 86% 84%,color-mix(in srgb,var(--marker) 34%,transparent) 0,transparent 8%),
+    radial-gradient(circle at 62% 104%,color-mix(in srgb,var(--violet) 18%,transparent) 0,transparent 20%)}
+.hero svg.contour{position:absolute;right:-80px;top:0;width:min(760px,95%);height:100%;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 18%,#000 62%);mask-image:linear-gradient(90deg,transparent 0,transparent 18%,#000 62%)}
+.contour path{fill:none;stroke:color-mix(in srgb,var(--violet) 22%,transparent);stroke-width:1.2}
 .contour path.vein{stroke:var(--bar);stroke-width:2;opacity:.9}
 @media (prefers-reduced-motion: no-preference){
   .contour path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.9s cubic-bezier(.65,0,.35,1) forwards;animation-delay:calc(var(--d,0) * 85ms)}
@@ -104,7 +124,7 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 .hero p.lead{font-size:clamp(18px,2.3vw,21px);max-width:56ch;color:var(--muted);margin-top:22px}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
 
-.snap{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
+.snap{background:var(--raised);border:1px solid var(--line);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow)}
 .snap-k{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:8px}
 .snap-k::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--good)}
 .snap-body{margin-top:10px;display:grid;gap:8px}
@@ -130,7 +150,7 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 
 /* ---------- Secciones ---------- */
 section{padding-block:80px}
-section.alt{background:var(--surface);border-block:1px solid var(--line);
+section.alt{background:color-mix(in srgb,var(--violet) 5%,transparent);border-block:1px solid var(--line);
   margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
 .sec-head{max-width:64ch;margin-bottom:40px}
 .sec-head h2{font-size:clamp(34px,5vw,56px)}
@@ -188,8 +208,8 @@ p.sub-p{color:var(--muted);max-width:64ch;margin:-8px 0 24px}
 .chart .dot.pending{fill:var(--bar-soft);stroke:var(--bar);stroke-width:1.5}
 .chart figcaption{font-size:13px;color:var(--muted);margin-top:12px}
 /* Movimiento del panel: la ola de las barras, el pulso de las líneas y la máscara que las revela. */
-.chart .wave{fill:var(--surface);opacity:0;pointer-events:none}
-.chart .glint{fill:none;stroke:var(--violet);stroke-width:3.5;stroke-dasharray:0 2;pointer-events:none}
+.chart .wave{fill:var(--fg);opacity:0;pointer-events:none}
+.chart .glint{fill:none;stroke:var(--marker);stroke-width:3.5;stroke-dasharray:0 2;pointer-events:none}
 .chart .reveal{transform-box:fill-box;transform-origin:0 50%}
 .motion-ctl{display:flex;justify-content:flex-end;margin:-20px 0 12px}
 .motion-foot{margin-top:14px}
@@ -202,7 +222,7 @@ p.sub-p{color:var(--muted);max-width:64ch;margin:-8px 0 24px}
 .sw.p{background:var(--bar-soft);border:1.5px dashed var(--bar)}
 .tip{position:absolute;z-index:40;pointer-events:none;background:var(--fg);color:var(--bg);font-size:13px;line-height:1.45;padding:8px 10px;border-radius:6px;max-width:260px;opacity:0;transition:opacity .12s}
 .tip.on{opacity:1}
-details{margin-top:40px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg)}
+details{margin-top:40px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raised)}
 summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:16px}
 .tblwrap{overflow-x:auto;padding:0 16px 16px;overscroll-behavior-x:contain}
 table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:680px}
@@ -228,7 +248,7 @@ td.na{color:var(--muted)}
 @media (max-width:760px){.demo{grid-template-columns:1fr}}
 
 /* ---------- Proyectos ---------- */
-.stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg)}
+.stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--raised)}
 .stage{padding:16px;border-right:1px solid var(--line);min-width:0}
 .stage:last-child{border-right:0}
 .stage .st{font-size:13.5px;font-weight:600;color:var(--accent)}
@@ -240,7 +260,7 @@ td.na{color:var(--muted)}
 
 .feature-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px 44px;align-items:start}
 @media (max-width:860px){.feature-grid{grid-template-columns:1fr}}
-.feature{background:var(--bg);border:1px solid var(--line);border-top:3px solid var(--bar);border-radius:var(--radius);padding:26px;display:grid;gap:14px;min-width:0}
+.feature{background:var(--raised);border:1px solid var(--line);border-top:3px solid var(--bar);border-radius:var(--radius);padding:26px;display:grid;gap:14px;min-width:0}
 .feature h4{font-size:27px}
 .feature-side{display:grid;gap:32px}
 .side-item{border-top:1px solid var(--fg);padding-top:14px;display:grid;gap:10px}

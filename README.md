@@ -5,7 +5,7 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 ## Archivos
 
 - `index.html`: la página, con estas secciones: inicio, panel de Veladero, casos de uso, proyectos, para empresas y proveedores, y registro de correcciones.
-- `estilos.css`: colores, tipografía y diseño, con modo claro y oscuro automático.
+- `estilos.css`: colores, tipografía y diseño. Versión clara de la marca de los carruseles (lavanda cuadriculado, violeta y oro); `.mano` es la palabra clave manuscrita (Caveat) de cada título y `.subra` el subrayado dorado a mano.
 - `app.js`: dibuja los gráficos y las cifras del panel a partir de `datos/veladero.js`.
 - `datos/veladero.js` y `datos/veladero_trimestral_barrick.csv`: **se generan solos, no editarlos a mano.**
 - `img/vibracion_camiones.webp` y `.png`: gráfico del ejemplo de mantenimiento predictivo (datos simulados). El navegador usa el WebP, que pesa menos de la mitad.

@@ -171,7 +171,7 @@
         return (pairs.length - 1) * 70 + 720;
       },
       /* Bucle: una ola de luz pasa por las barras en orden de trimestre, cada 3 s.
-         La ola oscurece el oro: en el pico (0,35) la barra queda en #A4863D, 5,5:1 contra el fondo. */
+         La ola oscurece el violeta (es tinta al 35%), así que la barra nunca pierde contraste contra el fondo. */
       loop: function () {
         pairs.forEach(function (p) {
           addLoop(svg._m, p.wave, [{ opacity: 0, offset: 0 }, { opacity: 0.35, offset: 0.1 }, { opacity: 0, offset: 0.28 }, { opacity: 0, offset: 1 }],
@@ -471,6 +471,16 @@
       });
     }, { rootMargin: "-45% 0px -50% 0px" });
     links.forEach(function (a) { var t = document.querySelector(a.getAttribute("href")); if (t) io.observe(t); });
+  }
+
+  /* ---------- Subrayados a mano: se dibujan la primera vez que entran en pantalla ---------- */
+  var trazos = Array.prototype.slice.call(document.querySelectorAll(".subra"));
+  if (trazos.length && "IntersectionObserver" in window && !REDUCE.matches) {
+    document.documentElement.classList.add("trazo");
+    var io3 = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("on"); io3.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    trazos.forEach(function (t) { io3.observe(t); });
   }
 
   /* ---------- Copiar correo ---------- */
