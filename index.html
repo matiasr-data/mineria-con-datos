@@ -51,7 +51,7 @@
   "description": "Producción de oro (mina completa y parte de Barrick), mineral procesado, ley y costos por onza de la mina Veladero, San Juan, Argentina, por trimestre desde 2025. Cifras tomadas de los informes trimestrales de Barrick.",
   "inLanguage": "es-AR",
   "spatialCoverage": {"@type": "Place", "name": "Veladero, Iglesia, San Juan, Argentina"},
-  "temporalCoverage": "2025-01/2026-06",
+  "temporalCoverage": "2025-01/2026-09",
   "isBasedOn": "https://www.barrick.com/English/investors/quarterly-reports/default.aspx",
   "creator": {"@type": "Person", "name": "Matías"},
   "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://matiasr-data.github.io/mineria-con-datos/datos/veladero_trimestral_barrick.csv"}
@@ -140,7 +140,7 @@
             </div>
           </div>
           <svg id="svg-prod" viewBox="0 0 520 300" aria-label="Gráfico de barras de la producción de oro de Veladero por trimestre"></svg>
-          <div class="legend"><span><i class="sw"></i>Dato de Barrick</span><span><i class="sw p"></i>Pendiente de confirmar con el PDF original</span></div>
+          <div class="legend"><span><i class="sw"></i>Dato de Barrick</span><span data-si-pendiente><i class="sw p"></i>Pendiente de confirmar con el PDF original</span></div>
         </figure>
 
         <figure class="chart">
@@ -164,17 +164,17 @@
         </figure>
       </div>
 
-      <p class="note"><b>Cómo leerlo.</b> En 2026 la ley es más baja que a comienzos de 2025 y el costo de ventas por onza subió de US$1.141 (T1 2025) a US$2.098 (T2 2026). El AISC no siguió una línea recta: subió en el T4 2025, bajó en el T1 2026 y volvió a subir en el T2. Los informes revisados no explican las causas de la baja del segundo trimestre de 2026, y por eso esta página no las supone. <span id="proximo"></span></p>
+      <p class="note"><b>Cómo leerlo.</b> En el T3 2026 la producción cayó 25% contra el T2: según Barrick, los temporales de invierno obligaron a suspender la operación varias veces en el trimestre y entró menos mineral a la pila de lixiviación. Con menos onzas, el costo por onza sube: el costo de ventas pasó de US$1.141 (T1 2025) a US$2.606 (T3 2026) y el AISC llegó a US$1.788. Barrick espera que Veladero cierre 2026 cerca o por debajo del piso de su guía. Para la baja del segundo trimestre, los informes revisados no dan la causa, y por eso esta página no la supone. <span id="proximo"></span></p>
 
       <details>
         <summary>Ver la tabla de datos</summary>
         <div class="tblwrap"><table id="tbl"></table></div>
         <div class="tbl-foot">
-          <span>* Pendiente de confirmar con el PDF original de Barrick. s/d: sin dato en las fuentes revisadas.</span>
+          <span><span data-si-pendiente>* Pendiente de confirmar con el PDF original de Barrick. </span>s/d: sin dato en las fuentes revisadas.</span>
           <a class="btn ghost small" href="datos/veladero_trimestral_barrick.csv" download>Descargar CSV</a>
         </div>
       </details>
-      <p class="note">Fuente: Barrick Mining Corporation, Mine Statistics y MD&amp;A trimestrales (T3 2025, T1 2026 y T2 2026), barrick.com, sección Investors. El T4 2025 solo tiene la parte de Barrick (50%), tomada del comparativo del informe del T1 2026. Guía 2026 de Barrick para su 50%: 180.000 a 200.000 onzas. Última actualización: <span data-actualizado></span>.</p>
+      <p class="note">Fuente: Barrick Mining Corporation, Mine Statistics y MD&amp;A trimestrales (T3 2025, T1 2026, T2 2026 y T3 2026), barrick.com, sección Investors. El T4 2025 solo tiene la parte de Barrick (50%), tomada del comparativo del informe del T1 2026. Guía 2026 de Barrick para su 50%: 180.000 a 200.000 onzas. Última actualización: <span data-actualizado></span>.</p>
     </div>
   </div>
 </section>
@@ -381,7 +381,8 @@
     <ul class="log">
       <li><time datetime="2026-11">Nov. 2026</time><div><b>Reel 4: el aumento de 15% era contra otro trimestre.</b><span> La producción del primer trimestre de 2026 subió 15% contra el cuarto trimestre de 2025, no contra el primero de 2025. El reel se reescribió con los informes de Barrick.</span></div></li>
       <li><time datetime="2026-11">Nov. 2026</time><div><b>Proyección 2026 de Veladero: se usa la guía de Barrick.</b><span> Una nota de prensa citaba 380.000 a 440.000 onzas; la guía de Barrick es 360.000 a 400.000 para la mina completa (180.000 a 200.000 para su 50%).</span></div></li>
-      <li><time datetime="2026-11">Nov. 2026</time><div><b>Tercer trimestre de 2025 cargado, pendiente de confirmar.</b><span> Los números se extrajeron del PDF de Barrick con una herramienta automática. Quedan marcados con línea punteada hasta revisarlos a mano.</span></div></li>
+      <li><time datetime="2026-11-09">Nov. 2026</time><div><b>Tercer trimestre de 2026 cargado.</b><span> Del informe de Barrick del 9 de noviembre de 2026: 54.000 onzas de la mina completa (27.000 para Barrick), 25% menos que en el T2 por los temporales de invierno.</span></div></li>
+      <li><time datetime="2026-11-09">Nov. 2026</time><div><b>Tercer trimestre de 2025 confirmado.</b><span> Se había cargado con una herramienta automática y estaba marcado con línea punteada. Las cifras coinciden con el comparativo del informe del T3 2026 de Barrick, así que se saca la marca.</span></div></li>
     </ul>
   </div>
 </section>

@@ -5,8 +5,9 @@
 
   /* Guía anual de Barrick para su parte (50%) de Veladero, en miles de onzas. */
   var GUIA = { anio: 2026, min: 180, max: 200 };
-  /* Próximo informe trimestral de Barrick (anuncio del 9/10/2026). */
-  var PROXIMO = { periodo: "2026-T3", fecha: new Date(2026, 10, 9), texto: "9 de noviembre de 2026" };
+  /* Próximo informe trimestral de Barrick. Cuando Barrick anuncie la fecha, completar fecha y texto
+     (por ejemplo: fecha: new Date(2027, 1, 5), texto: "5 de febrero de 2027"). */
+  var PROXIMO = { periodo: "2026-T4", nombre: "cuarto trimestre de 2026", fecha: null, texto: "" };
 
   var NS = "http://www.w3.org/2000/svg";
   var NB = " "; /* espacio que no se corta entre número y unidad */
@@ -416,8 +417,13 @@
   if (nx && D.length) {
     var lastP = D[D.length - 1].periodo;
     if (lastP >= PROXIMO.periodo) nx.textContent = "";
-    else if (new Date() >= PROXIMO.fecha) nx.textContent = "Barrick publicó el " + PROXIMO.periodo.replace("-", " ") + " el " + PROXIMO.texto + ". Falta cargarlo en el panel.";
-    else nx.textContent = "Barrick publica el tercer trimestre de 2026 el " + PROXIMO.texto + ". Se agrega cuando salga.";
+    else if (!PROXIMO.fecha) nx.textContent = "El próximo informe de Barrick es el del " + PROXIMO.nombre + "; todavía no tiene fecha anunciada. Se agrega cuando salga.";
+    else if (new Date() >= PROXIMO.fecha) nx.textContent = "Barrick publicó el " + PROXIMO.nombre + " el " + PROXIMO.texto + ". Falta cargarlo en el panel.";
+    else nx.textContent = "Barrick publica el " + PROXIMO.nombre + " el " + PROXIMO.texto + ". Se agrega cuando salga.";
+  }
+  /* Si no queda ningún trimestre pendiente de confirmar, se ocultan las referencias a "pendiente". */
+  if (!D.some(function (d) { return d.pendiente; })) {
+    document.querySelectorAll("[data-si-pendiente]").forEach(function (e) { e.hidden = true; });
   }
 
   /* ---------- Portada: curvas de nivel que se dibujan al cargar, con una veta ocre ----------

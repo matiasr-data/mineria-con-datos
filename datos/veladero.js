@@ -1,7 +1,7 @@
 // Generado por herramientas/actualizar_web.py. No editar a mano:
 // cambiá datos/data/veladero_trimestral_barrick.csv y volvé a correr el script.
 window.VELADERO = {
- "actualizado": "6 de noviembre de 2026",
+ "actualizado": "9 de noviembre de 2026",
  "filas": [
   {
    "anio": 2025,
@@ -42,8 +42,8 @@ window.VELADERO = {
    "cv": 1352,
    "cct": 787,
    "aisc": 1498,
-   "fuente": "Barrick Q3 2025 Mine Stats (extraído 4/11/2026; contrastar con el PDF original)",
-   "pendiente": true
+   "fuente": "Barrick Q3 2026 Mine Stats (comparativo; coincide con Q3 2025)",
+   "pendiente": false
   },
   {
    "anio": 2025,
@@ -85,6 +85,20 @@ window.VELADERO = {
    "cct": 1176,
    "aisc": 1487,
    "fuente": "Barrick Q2 2026 Mine Stats",
+   "pendiente": false
+  },
+  {
+   "anio": 2026,
+   "trim": 3,
+   "periodo": "2026-T3",
+   "p100": 54,
+   "pat": 27,
+   "t": 1514,
+   "ley": 0.66,
+   "cv": 2606,
+   "cct": 1486,
+   "aisc": 1788,
+   "fuente": "Barrick Q3 2026 Mine Stats (9/11/2026)",
    "pendiente": false
   }
  ]
