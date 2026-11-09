@@ -31,7 +31,7 @@ window.PUBLICACIONES = [
   "tema": "Exportaciones",
   "palabra_clave": "NIEVE",
   "url": "",
-  "v": "75fb347c"
+  "v": "21416496"
  },
  {
   "slug": "reel-02",
