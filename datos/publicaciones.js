@@ -64,7 +64,7 @@ window.PUBLICACIONES = [
   "tema": "Veladero",
   "palabra_clave": "BARRICK",
   "url": "",
-  "v": "91add881"
+  "v": "0ba0712e"
  },
  {
   "slug": "reel-05",
