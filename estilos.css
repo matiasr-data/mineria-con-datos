@@ -9,7 +9,7 @@
 :root{
   --night-950:#0B0614; --night-900:#140B24; --night-800:#1E1333; --night-700:#2E2147;
   --lav-50:#EFE9FA; --lav-100:#F1EEFB; --lav-400:#A99CC6; --lav-ink:#4B3A6B;
-  --violet-600:#7C3AED; --violet-700:#6D28D9; --violet-200:#DDD0F8;
+  --violet-600:#7C3AED; --violet-700:#6D28D9; --acento:#FFE66B; --violet-200:#DDD0F8;
   --lav-200:#D8CDEE; --lav-muted:#5B4E78; --white:#FFFFFF; --tint:#F7F3FE;
   --green-700:#0F7A4D; --red-700:#B4361F;
   --gold-400:#F2C84B; --gold-900:#4A3A12; --gold-100:#FFE9A8;
@@ -20,7 +20,7 @@
 :root{
   --bg:var(--lav-50); --surface:var(--tint); --raised:var(--white); --fg:#150A24; --muted:var(--lav-muted); --line:var(--lav-200);
   --accent:var(--violet-700); --bar:var(--violet-600); --bar-soft:var(--violet-200); --good:var(--green-700); --warn:var(--red-700);
-  --violet:var(--violet-600); --violet-dark:var(--violet-700); --vein-glint:var(--gold-400); --marker:var(--gold-400);
+  --violet:var(--violet-600); --violet-dark:var(--violet-700); --vein-glint:var(--gold-400); --marker:var(--acento);
   /* La tarjeta de contacto va al revés: noche con texto claro, como los slides oscuros de los carruseles. */
   --paper:var(--night-950); --paper-ink:var(--lav-100); --paper-muted:var(--lav-400);
   --shadow:0 24px 48px -28px rgba(60,30,120,.35);
@@ -47,11 +47,15 @@ h1,h2,h3,h4{line-height:1.1;margin:0;text-wrap:balance}
 h1,h2{font-family:var(--font-display);font-weight:400;letter-spacing:0;line-height:1.04}
 h3,h4{font-family:var(--font-body);font-weight:700;letter-spacing:0}
 p{margin:0;text-wrap:pretty}
-/* La palabra clave de cada título: misma fuente, en violeta y con un subrayado fino dorado. */
-.clave{color:var(--violet);background:linear-gradient(var(--marker),var(--marker)) no-repeat 0 96% / 100% .05em;padding-bottom:.04em;
+/* La palabra clave de cada título.
+   Fondos claros: violeta oscuro (#5B21B6, 8:1 sobre lavanda) con un subrayado lila fino.
+   Fondos de noche (portada y óvalo): el acento #FFE66B con subrayado lila. */
+.clave{color:#5B21B6;background:linear-gradient(#A78BFA,#A78BFA) no-repeat 0 86% / 100% .06em;
   -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero.noche .clave,.vitrina-sec .clave{color:var(--acento);background:linear-gradient(var(--violet),var(--violet)) no-repeat 0 86% / 100% .07em;
+  padding:0 0 .05em}
 /* Subrayado dorado a mano debajo de las palabras importantes del texto. Se dibuja al entrar en pantalla. */
-.subra{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C38 4.5 74 11 112 7.2S170 4 197 8' fill='none' stroke='%23F2C84B' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 100% / 100% .5em;padding-bottom:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;color:var(--fg)}
+.subra{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C38 4.5 74 11 112 7.2S170 4 197 8' fill='none' stroke='%23FFE66B' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 100% / 100% .5em;padding-bottom:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;color:var(--fg)}
 @media (prefers-reduced-motion: no-preference){
   html.trazo .subra{transition:background-size .9s var(--ease-out)}
   html.trazo .subra:not(.on){background-size:0% .5em}
@@ -171,7 +175,6 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
     radial-gradient(circle at 92% 8%,rgba(242,200,75,.30) 0,transparent 7%),
     radial-gradient(circle at 6% 30%,rgba(124,58,237,.30) 0,transparent 22%),
     linear-gradient(180deg,#0B0614 0%,#160C2A 55%,#0B0614 100%)}
-.hero.noche .clave{color:var(--clave-osc)}
 .hero.noche svg.sierra{position:absolute;left:0;right:0;bottom:0;width:100%;height:62%;pointer-events:none}
 .sierra .s1{fill:#2B1C4A}.sierra .s2{fill:#1F1338}.sierra .s3{fill:#130A24}
 .sierra .cresta{fill:none;stroke:rgba(242,200,75,.28);stroke-width:1.2}
@@ -186,7 +189,7 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 .hero.noche h1{font-size:clamp(26px,3.4vw,40px);max-width:30ch;line-height:1.08}
 .rota{font-family:var(--font-display);font-weight:400;font-size:clamp(72px,12.5vw,150px);line-height:.92;margin:8px 0 16px;color:#fff;
   letter-spacing:-.005em;white-space:nowrap}
-.rota i{font-style:normal;color:var(--gold-400)}
+.rota i{font-style:normal;color:var(--acento)}
 .rota span{display:inline-block;will-change:transform,filter,opacity}
 .hero.noche p.lead{color:var(--muted);max-width:58ch;margin-top:0}
 .btn.oro{background:var(--gold-400);border-color:var(--gold-400);color:#150A24;border-radius:4px}
@@ -373,44 +376,49 @@ dl.facts dd{margin:0;text-align:right;font-weight:600}
 .guides .dl small{font-size:13px;color:var(--muted)}
 @media (max-width:640px){.guides li{grid-template-columns:1fr}.guides .dl{justify-items:start;text-align:left}}
 
-/* ---------- Reels: vitrina ----------
-   Banda de noche como la portada. Una fila de tarjetas verticales (9:16) que se desliza con el dedo,
-   la rueda o las flechas. Solo se reproduce el avance de una tarjeta a la vez, sin sonido. */
-.vitrina-sec{--fg:#F1EEFB; --muted:#BDB2D6; --line:rgba(241,238,251,.14); --accent:var(--gold-400);
-  color:var(--fg);background:radial-gradient(circle at 88% 0%,rgba(124,58,237,.35) 0,transparent 30%),linear-gradient(180deg,#0B0614,#160C2A);
+/* ---------- Publicaciones: óvalo 3D ----------
+   Reels y carruseles girando en un óvalo, con su avance en video dentro de cada tarjeta. Se reproduce solo el
+   de la tarjeta que queda adelante. El giro es un solo transform por tarjeta (sin repintar), se frena con el mouse
+   encima, al arrastrar, fuera de pantalla y con movimiento reducido. */
+.vitrina-sec{--fg:#F1EEFB; --muted:#BDB2D6; --line:rgba(241,238,251,.14); --accent:var(--acento);
+  color:var(--fg);overflow:hidden;background:radial-gradient(circle at 88% 0%,rgba(124,58,237,.35) 0,transparent 30%),radial-gradient(circle at 10% 90%,rgba(255,230,107,.12) 0,transparent 24%),linear-gradient(180deg,#0B0614,#160C2A);
   margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
-.vitrina-sec .clave{color:#B9A2FF}
-.vit-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 24px;flex-wrap:wrap;margin-bottom:28px}
+.vit-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 24px;flex-wrap:wrap;margin-bottom:8px}
 .vit-head .sec-head{margin-bottom:0}
 .vit-ctl{display:flex;gap:10px}
 .vit-flecha{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;
-  transition:border-color .2s,background-color .2s,opacity .2s}
+  transition:border-color .2s,background-color .2s}
 .vit-flecha svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.vit-flecha:hover:not(:disabled){border-color:var(--gold-400);background:rgba(255,255,255,.06)}
-.vit-flecha:disabled{opacity:.3;cursor:default}
-.vitrina{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(210px,22vw,248px);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
-  overscroll-behavior-x:contain;padding:4px 2px 18px;scrollbar-width:thin;scrollbar-color:rgba(241,238,251,.3) transparent}
-.vitrina:focus-visible{outline:2px solid var(--gold-400);outline-offset:4px}
-.reel{position:relative;scroll-snap-align:start;display:flex;flex-direction:column;min-width:0}
-.reel-media{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#140B24;border:1px solid var(--line);
-  box-shadow:0 24px 40px -28px rgba(0,0,0,.9)}
-.reel-media img,.reel-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.reel-media video{opacity:0;transition:opacity .35s}
-.reel.play .reel-media video{opacity:1}
-.reel-media::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(transparent,rgba(11,6,20,.85));pointer-events:none}
-.reel-chip{position:absolute;z-index:1;top:10px;left:10px;font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 9px;border-radius:99px;
-  background:rgba(11,6,20,.72);border:1px solid var(--line);color:var(--fg)}
-.reel-chip.prox{color:var(--gold-400);border-color:rgba(242,200,75,.5)}
-.reel-tema{position:absolute;z-index:1;left:12px;right:12px;bottom:12px;font-size:13.5px;font-weight:600;color:#fff;line-height:1.25}
-.reel h3{font-size:18px;margin-top:14px;line-height:1.2}
-.reel-gancho{font-size:14.5px;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.reel-kw{font-family:var(--font-mono);font-size:12px;color:var(--gold-400);margin-top:10px}
-.reel-link{margin-top:auto;padding-top:12px;font-weight:700;font-size:15px;color:#fff;text-decoration:underline;text-decoration-color:var(--gold-400);
-  text-underline-offset:4px;align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
-.reel-link:hover{color:var(--gold-400)}
-.vit-pie{margin-top:22px}
+.vit-flecha:hover{border-color:var(--acento);background:rgba(255,255,255,.06)}
+.ovalo{--card-w:clamp(150px,16vw,210px);position:relative;height:calc(var(--card-w) * 16 / 9 + 40px);
+  touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.ovalo.arrastrando{cursor:grabbing}
+.ovalo:focus-visible{outline:2px solid var(--acento);outline-offset:-6px;border-radius:16px}
+.ovalo-anillo{position:absolute;left:50%;top:30px;width:0;height:0}
+.oc{position:absolute;left:calc(var(--card-w) / -2);top:0;width:var(--card-w);aspect-ratio:9/16;padding:0;margin:0;border-radius:14px;overflow:hidden;
+  background:#140B24;border:1px solid var(--line);box-shadow:0 30px 50px -30px rgba(0,0,0,.95);cursor:pointer;color:#fff;font:inherit;
+  will-change:transform,opacity;transition:border-color .3s}
+.oc.carrusel{aspect-ratio:4/5;top:calc(var(--card-w) * (16 / 9 - 5 / 4) / 2)}
+.oc img,.oc video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.oc video{opacity:0;transition:opacity .35s}
+.oc.play video{opacity:1}
+.oc-tipo{position:absolute;z-index:1;top:8px;left:8px;font-family:var(--font-mono);font-size:10.5px;font-weight:500;padding:3px 8px;border-radius:99px;
+  background:rgba(11,6,20,.72);border:1px solid var(--line);color:#fff}
+.oc.frente{border-color:var(--acento)}
+.oc:focus-visible{outline:2px solid var(--acento);outline-offset:2px}
+.ovalo-ficha{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 28px;align-items:end;max-width:760px;margin:6px auto 0;padding:18px 22px;
+  border:1px solid var(--line);border-radius:14px;background:rgba(11,6,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ficha-meta{font-family:var(--font-mono);font-size:12px;color:var(--muted);display:flex;gap:6px 14px;flex-wrap:wrap}
+.ficha-meta .prox{color:var(--acento)}
+.ovalo-ficha h3{font-size:21px;margin-top:6px}
+.ficha-gancho{color:var(--muted);font-size:15px;margin-top:4px}
+.ficha-kw{font-family:var(--font-mono);font-size:12.5px;color:var(--acento);margin-top:8px}
+.ficha-link{font-weight:700;font-size:15px;color:#fff;text-decoration:underline;text-decoration-color:var(--acento);text-underline-offset:4px;
+  min-height:44px;display:inline-flex;align-items:center;white-space:nowrap}
+.ficha-link:hover{color:var(--acento)}
+.vit-pie{margin-top:22px;text-align:center}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media (max-width:560px){.vitrina{grid-auto-columns:68vw;gap:14px}.vit-ctl{display:none}}
+@media (max-width:640px){.ovalo-ficha{grid-template-columns:1fr}.vit-ctl{display:none}}
 
 /* ---------- Empresas ---------- */
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px 48px}

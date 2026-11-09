@@ -36,12 +36,13 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 - Movimiento del panel (en `app.js`, sección "Movimiento"): cada gráfico se arma una vez cuando se ve el 35%, en orden cronológico, y después queda en bucle (ola en las barras, pulso en las líneas, reflejo en la guía, veta que fluye en la portada). No hay botón de pausa (se sacó a pedido el 9/11/2026). Fuera de pantalla o con la pestaña en segundo plano, el bucle se frena solo. Con movimiento reducido, todo queda quieto.
 - Los datos estructurados (schema.org `WebSite` y `Dataset`) están en el `<head>` de `index.html`. El de `Dataset` permite que la tabla de Veladero aparezca en Google Dataset Search; actualizar `temporalCoverage` cuando se sumen trimestres.
 
-## Vitrina de reels
+## Publicaciones (óvalo 3D)
 
-- La lista está en `comunidad/publicaciones.csv` (fuera de esta carpeta). Una fila por reel: archivo de video, segundo de la miniatura (`portada_seg`), estado (`publicado`, `proximo` u `oculto`), fecha, título, gancho, tema, palabra clave y link de Instagram.
-- Cuando subas un reel: cambiá su estado a `publicado`, poné la fecha (AAAA-MM-DD) y pegá el link del posteo en `url`. Sin link, el botón lleva al perfil. Los próximos no llevan link: para seguir la cuenta está el botón de abajo de la vitrina.
-- `python herramientas/actualizar_web.py` recorta solo el avance (6 s, sin sonido, 540 px) y la miniatura de cada reel en `reels/`, y genera `datos/publicaciones.js`. Necesita ffmpeg. Solo rehace un avance si el video original cambió.
-- En la página se reproduce un solo avance a la vez: el de la tarjeta bajo el mouse, o la primera que está entera a la vista. No se reproduce solo con movimiento reducido ni fuera de pantalla.
+- La sección "Reels y carruseles, en movimiento" muestra todas las publicaciones girando en un óvalo. La de adelante reproduce su avance sin sonido y abajo aparece su ficha (tipo, estado, tema, gancho, palabra clave y link).
+- La lista está en `comunidad/publicaciones.csv` (fuera de esta carpeta). Una fila por publicación: `tipo` (`reel` o `carrusel`), archivo de video (para los carruseles, el `01.mp4`), segundo de la miniatura (`portada_seg`; en los carruseles, 0), estado (`publicado`, `proximo` u `oculto`), fecha, título, gancho, tema, palabra clave y link de Instagram. El orden del archivo es el orden del óvalo.
+- Cuando subas algo: cambiá su estado a `publicado`, poné la fecha (AAAA-MM-DD) y pegá el link del posteo en `url`. Sin link, la ficha lleva al perfil.
+- `python herramientas/actualizar_web.py` recorta solo el avance (6 s, sin sonido, 540 px) y la miniatura de cada una en `reels/`, y genera `datos/publicaciones.js`. Necesita ffmpeg. Solo rehace un avance si el video original cambió.
+- El óvalo gira solo (una vuelta cada 70 s) y se frena con el mouse encima, al arrastrar, con foco adentro, fuera de pantalla y con movimiento reducido. Se gira arrastrando, con las flechas o tocando una tarjeta.
 
 ## Verlo en la computadora
 

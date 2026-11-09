@@ -2,6 +2,7 @@
 window.PUBLICACIONES = [
  {
   "slug": "reel-00",
+  "tipo": "reel",
   "estado": "publicado",
   "fecha": "2026-11-07",
   "titulo": "San Juan tiene minería",
@@ -12,7 +13,20 @@ window.PUBLICACIONES = [
   "v": "2ed20ea6"
  },
  {
+  "slug": "car-presentacion",
+  "tipo": "carrusel",
+  "estado": "publicado",
+  "fecha": "2026-11-07",
+  "titulo": "Presentación de la cuenta",
+  "gancho": "La minería de San Juan, contada con datos.",
+  "tema": "Presentación",
+  "palabra_clave": "",
+  "url": "",
+  "v": "6d4709c6"
+ },
+ {
   "slug": "reel-01",
+  "tipo": "reel",
   "estado": "publicado",
   "fecha": "2026-11-07",
   "titulo": "Veladero en 30 segundos",
@@ -23,7 +37,20 @@ window.PUBLICACIONES = [
   "v": "c1802cce"
  },
  {
+  "slug": "car-85-de-cada-100",
+  "tipo": "carrusel",
+  "estado": "publicado",
+  "fecha": "2026-11-09",
+  "titulo": "85 de cada 100",
+  "gancho": "De cada 100 dólares que San Juan le vende al mundo, 85 salen de la minería.",
+  "tema": "Exportaciones",
+  "palabra_clave": "DATOS",
+  "url": "",
+  "v": "b4fcb35d"
+ },
+ {
   "slug": "reel-06",
+  "tipo": "reel",
   "estado": "proximo",
   "fecha": "",
   "titulo": "El mes que nevó",
@@ -34,29 +61,8 @@ window.PUBLICACIONES = [
   "v": "21416496"
  },
  {
-  "slug": "reel-02",
-  "estado": "proximo",
-  "fecha": "",
-  "titulo": "Oro y ampliación de Veladero",
-  "gancho": "Veladero va a procesar 1,6 millones de onzas de oro más. Te explico cómo.",
-  "tema": "RIGI",
-  "palabra_clave": "RIGI",
-  "url": "",
-  "v": "012bea61"
- },
- {
-  "slug": "reel-03",
-  "estado": "proximo",
-  "fecha": "",
-  "titulo": "Una mina genera datos",
-  "gancho": "Una mina puede avisarte que un camión se va a romper antes de que se rompa.",
-  "tema": "Mantenimiento predictivo (datos simulados)",
-  "palabra_clave": "SENSORES",
-  "url": "",
-  "v": "6edfdf68"
- },
- {
   "slug": "reel-04",
+  "tipo": "reel",
   "estado": "proximo",
   "fecha": "",
   "titulo": "Los números de Barrick",
@@ -67,7 +73,68 @@ window.PUBLICACIONES = [
   "v": "0ba0712e"
  },
  {
+  "slug": "car-menos-oro",
+  "tipo": "carrusel",
+  "estado": "proximo",
+  "fecha": "",
+  "titulo": "Menos oro, más dólares",
+  "gancho": "Veladero sacó 31% menos oro, pero San Juan exportó 13,5% más en dólares.",
+  "tema": "Oro y exportaciones",
+  "palabra_clave": "ORO",
+  "url": "",
+  "v": "804d2c6c"
+ },
+ {
+  "slug": "reel-02",
+  "tipo": "reel",
+  "estado": "proximo",
+  "fecha": "",
+  "titulo": "Oro y ampliación de Veladero",
+  "gancho": "Veladero va a procesar 1,6 millones de onzas de oro más. Te explico cómo.",
+  "tema": "RIGI",
+  "palabra_clave": "RIGI",
+  "url": "",
+  "v": "01daba9b"
+ },
+ {
+  "slug": "car-1-de-cada-7",
+  "tipo": "carrusel",
+  "estado": "proximo",
+  "fecha": "",
+  "titulo": "1 de cada 7",
+  "gancho": "En la minería de San Juan hay 5.572 puestos de trabajo en blanco.",
+  "tema": "Empleo",
+  "palabra_clave": "EMPLEO",
+  "url": "",
+  "v": "e61c2f37"
+ },
+ {
+  "slug": "reel-03",
+  "tipo": "reel",
+  "estado": "proximo",
+  "fecha": "",
+  "titulo": "Una mina genera datos",
+  "gancho": "Una mina puede avisarte que un camión se va a romper antes de que se rompa.",
+  "tema": "Mantenimiento predictivo (datos simulados)",
+  "palabra_clave": "SENSORES",
+  "url": "",
+  "v": "c1b83d04"
+ },
+ {
+  "slug": "car-vibra",
+  "tipo": "carrusel",
+  "estado": "proximo",
+  "fecha": "",
+  "titulo": "Antes de romperse, un camión vibra",
+  "gancho": "Antes de romperse, un camión vibra.",
+  "tema": "Mantenimiento predictivo (datos simulados)",
+  "palabra_clave": "SENSORES",
+  "url": "",
+  "v": "d2469fc0"
+ },
+ {
   "slug": "reel-05",
+  "tipo": "reel",
   "estado": "proximo",
   "fecha": "",
   "titulo": "Vicuña",
@@ -75,6 +142,18 @@ window.PUBLICACIONES = [
   "tema": "Cobre",
   "palabra_clave": "VICUÑA",
   "url": "",
-  "v": "6f75c50e"
+  "v": "9dd19cef"
+ },
+ {
+  "slug": "car-mujeres",
+  "tipo": "carrusel",
+  "estado": "proximo",
+  "fecha": "",
+  "titulo": "Mujeres en la minería",
+  "gancho": "En diez años, el empleo de mujeres en la minería de San Juan se multiplicó por 4,5.",
+  "tema": "Empleo",
+  "palabra_clave": "MUJERES",
+  "url": "",
+  "v": "6477bb0e"
  }
 ];

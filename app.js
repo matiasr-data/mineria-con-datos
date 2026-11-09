@@ -478,92 +478,148 @@
   }
 
 
-  /* ---------- Reels: vitrina ----------
+  /* ---------- Publicaciones: óvalo 3D ----------
      Las tarjetas salen de datos/publicaciones.js (lo genera actualizar_web.py desde comunidad/publicaciones.csv).
-     Se reproduce un solo avance a la vez, sin sonido: el de la tarjeta bajo el mouse o el foco, y si no hay,
-     la primera tarjeta entera a la vista. El video se crea recién cuando hace falta (no gasta datos antes).
-     No se reproduce solo con el botón de pausa, con movimiento reducido, fuera de pantalla ni con la pestaña oculta. */
-  var vit = document.getElementById("vitrina");
+     Cada tarjeta tiene un ángulo en el óvalo; el giro cambia un solo número (ang) y cada cuadro se recalcula la
+     posición de las 13 tarjetas con transform y opacidad. La de adelante reproduce su avance, sin sonido.
+     Gira solo cuando nadie lo toca; se frena con el mouse encima, al arrastrar, con foco adentro, fuera de
+     pantalla, con la pestaña oculta y con movimiento reducido. */
+  var ovalo = document.getElementById("ovalo"), anillo = document.getElementById("ovalo-anillo"), ficha = document.getElementById("ovalo-ficha");
   var PUBS = window.PUBLICACIONES || [];
   var IGURL = "https://www.instagram.com/mineriacondatos/";
-  if (vit && PUBS.length) {
+  if (ovalo && anillo && PUBS.length) {
     var MESC = ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sep.", "oct.", "nov.", "dic."];
     var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-    var pubs = PUBS.filter(function (p) { return p.estado === "publicado"; }).concat(PUBS.filter(function (p) { return p.estado !== "publicado"; }));
-    vit.innerHTML = pubs.map(function (p) {
-      var pub = p.estado === "publicado", fe = p.fecha ? p.fecha.split("-") : null;
-      var chip = pub ? (fe ? "Publicado el " + (+fe[2]) + " " + MESC[+fe[1] - 1] : "Publicado") : "Próximamente";
-      var src = "reels/" + p.slug;
-      return '<article class="reel" data-src="' + src + ".mp4?v=" + p.v + '">' +
-        '<div class="reel-media"><img src="' + src + ".webp?v=" + p.v + '" alt="" loading="lazy" width="540" height="960">' +
-        '<span class="reel-chip' + (pub ? "" : " prox") + '">' + chip + "</span>" +
-        '<span class="reel-tema">' + esc(p.tema) + "</span></div>" +
-        "<h3>" + esc(p.titulo) + "</h3>" +
-        '<p class="reel-gancho">' + esc(p.gancho) + "</p>" +
-        (pub && p.palabra_clave ? '<p class="reel-kw">Comentá ' + esc(p.palabra_clave) + "</p>" : "") +
-        /* Los próximos no llevan link: para seguir la cuenta está el botón de abajo de la vitrina. */
-        (pub ? '<a class="reel-link" href="' + esc(p.url || IGURL) + '" target="_blank" rel="noopener">Ver en Instagram' +
-          '<span class="sr-only">: ' + esc(p.titulo) + "</span></a>" : "") +
-        "</article>";
+    var N = PUBS.length, PASO = Math.PI * 2 / N, TAU = Math.PI * 2;
+    anillo.innerHTML = PUBS.map(function (p, i) {
+      var tipo = p.tipo === "carrusel" ? "Carrusel" : "Reel";
+      return '<button type="button" class="oc ' + (p.tipo === "carrusel" ? "carrusel" : "reel") + '" data-i="' + i + '" data-src="reels/' + p.slug + ".mp4?v=" + p.v + '"' +
+        ' aria-label="' + tipo + ": " + esc(p.titulo) + '">' +
+        '<img src="reels/' + p.slug + ".webp?v=" + p.v + '" alt="" loading="lazy" width="540" height="' + (p.tipo === "carrusel" ? 675 : 960) + '">' +
+        '<span class="oc-tipo" aria-hidden="true">' + tipo + "</span></button>";
     }).join("");
-    var cards = Array.prototype.slice.call(vit.children), vitVis = false, hoverCard = null, ratios = new Map();
+    var cards = Array.prototype.slice.call(anillo.children);
+    var ang = 0, objetivo = null, frente = -1, visible = false, encima = false, foco = false, arrastre = null, ultimoToque = 0, raf = 0, previo = 0;
+    var VEL = TAU / 70000; /* una vuelta cada 70 s: unos 5 s por publicación */
+    function norm(a) { a = a % TAU; if (a > Math.PI) a -= TAU; if (a < -Math.PI) a += TAU; return a; }
+    function medidas() {
+      var w = ovalo.clientWidth, c = cards[0] ? cards[0].offsetWidth : 180;
+      return { rx: Math.min(w * 0.42, 600), alto: c * 0.2 };
+    }
+    var M = medidas();
+    function fichaDe(i) {
+      var p = PUBS[i], pub = p.estado === "publicado", fe = p.fecha ? p.fecha.split("-") : null;
+      var estado = pub ? (fe ? "Publicado el " + (+fe[2]) + " " + MESC[+fe[1] - 1] : "Publicado") : "Próximamente";
+      ficha.innerHTML = '<div><p class="ficha-meta"><span>' + (p.tipo === "carrusel" ? "Carrusel" : "Reel") + "</span>" +
+        '<span class="' + (pub ? "" : "prox") + '">' + estado + "</span><span>" + esc(p.tema) + "</span><span>" + (i + 1) + " de " + N + "</span></p>" +
+        "<h3>" + esc(p.titulo) + "</h3>" + '<p class="ficha-gancho">' + esc(p.gancho) + "</p>" +
+        (pub && p.palabra_clave ? '<p class="ficha-kw">Comentá ' + esc(p.palabra_clave) + "</p>" : "") + "</div>" +
+        (pub ? '<a class="ficha-link" href="' + esc(p.url || IGURL) + '" target="_blank" rel="noopener">' + (p.url ? "Ver en Instagram" : "Verlo en el perfil") +
+          '<span class="sr-only">: ' + esc(p.titulo) + "</span></a>" : "");
+    }
     function videoDe(c) {
       var v = c.querySelector("video");
       if (!v) {
         v = document.createElement("video");
         v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true");
         v.preload = "auto"; v.src = c.getAttribute("data-src");
-        c.querySelector(".reel-media").insertBefore(v, c.querySelector(".reel-chip"));
+        c.insertBefore(v, c.querySelector(".oc-tipo"));
       }
       return v;
     }
-    function activa() {
-      if (hoverCard) return hoverCard;
-      if (paused || still() || document.hidden || !vitVis) return null;
-      for (var k = 0; k < cards.length; k++) if ((ratios.get(cards[k]) || 0) >= 0.85) return cards[k];
-      return null;
-    }
-    function vitSync() {
-      var a = activa();
-      cards.forEach(function (c) {
+    function reproducir() {
+      cards.forEach(function (c, i) {
         var v = c.querySelector("video");
-        if (c === a) {
+        if (i === frente && visible && !document.hidden && !still()) {
           v = videoDe(c); c.classList.add("play");
           var pr = v.play(); if (pr && pr.catch) pr.catch(function () { c.classList.remove("play"); });
         } else if (v) { v.pause(); c.classList.remove("play"); }
       });
     }
+    function dibujar() {
+      var mejor = 0, dmin = 9;
+      for (var i = 0; i < N; i++) {
+        var phi = norm(i * PASO - ang), co = Math.cos(phi);
+        /* Óvalo visto un poco desde arriba: las de atrás quedan más chicas, más altas y más apagadas.
+           Cada tarjeta lleva su propia perspectiva y su orden (z-index) según la profundidad, así ninguna se cruza con otra. */
+        var luz = (co + 1) / 2, esc3 = 0.42 + 0.58 * Math.pow(luz, 4);
+        var x = M.rx * Math.sin(phi), y = (co - 1) * M.alto;
+        /* Los de los costados miran hacia el centro (como un coverflow) y se achican rápido: el de adelante resalta. */
+        var giro = Math.max(-55, Math.min(55, -phi * 0.9 * 57.2958));
+        cards[i].style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + esc3.toFixed(3) + ") perspective(900px) rotateY(" + giro.toFixed(2) + "deg)";
+        cards[i].style.opacity = (0.25 + 0.75 * Math.pow(luz, 1.4)).toFixed(3);
+        cards[i].style.zIndex = Math.round(50 + 50 * co);
+        if (Math.abs(phi) < dmin) { dmin = Math.abs(phi); mejor = i; }
+      }
+      if (mejor !== frente) {
+        if (frente >= 0) cards[frente].classList.remove("frente");
+        frente = mejor; cards[frente].classList.add("frente");
+        fichaDe(frente); reproducir();
+      }
+    }
+    function gira() { return !still() && !encima && !foco && !arrastre && Date.now() - ultimoToque > 3500; }
+    function cuadro(t) {
+      raf = 0;
+      var dt = previo ? Math.min(t - previo, 64) : 16; previo = t;
+      if (arrastre) { /* la posición la pone el arrastre */ }
+      else if (objetivo !== null) {
+        var resto = objetivo - ang;
+        if (still() || Math.abs(resto) < 0.0005) { ang = objetivo; objetivo = null; }
+        else ang += resto * (1 - Math.exp(-dt / 110));
+      } else if (gira()) ang += VEL * dt;
+      dibujar();
+      if (visible && !document.hidden && (objetivo !== null || arrastre || gira() || Date.now() - ultimoToque <= 3500)) raf = requestAnimationFrame(cuadro);
+      else previo = 0;
+    }
+    function despertar() { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(cuadro); }
+    function irA(i) {
+      var base = i * PASO, d = norm(base - ang);
+      objetivo = ang + d; ultimoToque = Date.now(); despertar();
+    }
+    function paso(dir) { irA(((frente + dir) % N + N) % N); }
+    /* Arrastre con mouse o dedo. Si casi no se movió, cuenta como toque en la tarjeta. */
+    ovalo.addEventListener("pointerdown", function (e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      arrastre = { x: e.clientX, a: ang, movio: false, id: e.pointerId, t: e.target };
+      objetivo = null; ovalo.classList.add("arrastrando"); despertar();
+    });
+    window.addEventListener("pointermove", function (e) {
+      if (!arrastre || e.pointerId !== arrastre.id) return;
+      var dx = e.clientX - arrastre.x;
+      if (Math.abs(dx) > 6 && !arrastre.movio) { arrastre.movio = true; try { ovalo.setPointerCapture(e.pointerId); } catch (er) { /* sin captura */ } }
+      if (arrastre.movio) ang = arrastre.a - dx / (M.rx * 0.9);
+    });
+    function soltar(e) {
+      if (!arrastre || e.pointerId !== arrastre.id) return;
+      var a = arrastre; arrastre = null; ovalo.classList.remove("arrastrando"); ultimoToque = Date.now();
+      if (a.movio) { irA(((Math.round(norm(ang) / PASO) % N) + N) % N); return; }
+      var c = a.t && a.t.closest ? a.t.closest(".oc") : null;
+      if (!c) return;
+      var i = +c.getAttribute("data-i");
+      if (i !== frente) irA(i);
+      else { var l = ficha.querySelector(".ficha-link"); if (l) window.open(l.href, "_blank", "noopener"); }
+    }
+    window.addEventListener("pointerup", soltar);
+    window.addEventListener("pointercancel", soltar);
+    /* Teclado: las tarjetas son botones (Enter las trae adelante) y con el óvalo enfocado giran las flechas. */
     cards.forEach(function (c) {
-      c.addEventListener("mouseenter", function () { hoverCard = c; vitSync(); });
-      c.addEventListener("mouseleave", function () { if (hoverCard === c) hoverCard = null; vitSync(); });
-      c.addEventListener("focusin", function () { hoverCard = c; vitSync(); });
-      c.addEventListener("focusout", function () { if (hoverCard === c) hoverCard = null; vitSync(); });
+      c.addEventListener("click", function (e) { if (e.detail === 0) { var i = +c.getAttribute("data-i"); if (i !== frente) irA(i); } });
     });
-    if (HAS_IO) {
-      var ioCards = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { ratios.set(e.target, e.intersectionRatio); });
-        vitSync();
-      }, { root: vit, threshold: [0, 0.85, 1] });
-      cards.forEach(function (c) { ioCards.observe(c); });
-      new IntersectionObserver(function (es) { vitVis = es[0].isIntersecting; vitSync(); }, { threshold: 0.4 }).observe(vit);
-    }
-    document.addEventListener("visibilitychange", vitSync);
-    if (REDUCE.addEventListener) REDUCE.addEventListener("change", vitSync);
-    /* Flechas: avanzan de a una tarjeta y se apagan en las puntas. */
-    var flechas = Array.prototype.slice.call(document.querySelectorAll(".vit-flecha"));
-    function puntas() {
-      var max = vit.scrollWidth - vit.clientWidth - 2;
-      flechas.forEach(function (b) { b.disabled = +b.getAttribute("data-dir") < 0 ? vit.scrollLeft <= 2 : vit.scrollLeft >= max; });
-    }
-    flechas.forEach(function (b) {
-      b.addEventListener("click", function () {
-        var paso = cards[0].getBoundingClientRect().width + 20;
-        vit.scrollBy({ left: +b.getAttribute("data-dir") * paso, behavior: REDUCE.matches ? "auto" : "smooth" });
-      });
+    ovalo.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { paso(1); e.preventDefault(); }
+      else if (e.key === "ArrowLeft") { paso(-1); e.preventDefault(); }
     });
-    vit.addEventListener("scroll", puntas, { passive: true });
-    window.addEventListener("resize", puntas);
-    puntas();
+    document.querySelectorAll(".vit-flecha").forEach(function (b) { b.addEventListener("click", function () { paso(+b.getAttribute("data-dir")); }); });
+    ovalo.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") { encima = true; } });
+    ovalo.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") { encima = false; ultimoToque = 0; despertar(); } });
+    ovalo.addEventListener("focusin", function () { foco = true; });
+    ovalo.addEventListener("focusout", function () { foco = false; despertar(); });
+    if (HAS_IO) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; reproducir(); despertar(); }, { threshold: 0.25 }).observe(ovalo);
+    else visible = true;
+    document.addEventListener("visibilitychange", function () { reproducir(); despertar(); });
+    if (REDUCE.addEventListener) REDUCE.addEventListener("change", function () { reproducir(); despertar(); });
+    window.addEventListener("resize", function () { M = medidas(); dibujar(); });
+    dibujar();
   }
 
   /* Si la persona activa el movimiento reducido con la página abierta, se frena todo en el momento. */
