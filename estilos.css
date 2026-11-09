@@ -1,9 +1,9 @@
 /* Minería con Datos
    Concepto: la versión clara de la marca de los carruseles (estilo "Sistema"): papel lavanda cuadriculado,
    tinta noche, el violeta como color de los datos y luces doradas desenfocadas en la portada.
-   El oro no se usa para texto (no llega al contraste sobre lavanda): queda para los subrayados a mano y las luces.
-   Tipografía: Anton en mayúsculas para títulos y cifras grandes, Caveat (manuscrita, en minúscula y violeta)
-   para la palabra clave de cada título, Rajdhani para el texto y JetBrains Mono para rótulos y ejes. */
+   El oro no se usa para texto (no llega al contraste sobre lavanda): queda para los subrayados y las luces.
+   Tipografía: Anton para títulos (en minúscula, con mayúscula inicial) y cifras grandes; la palabra clave de cada
+   título va en violeta con un subrayado fino dorado. Rajdhani para el texto y JetBrains Mono para rótulos y ejes. */
 
 /* ---------- Tokens: capa base (valores) ---------- */
 :root{
@@ -25,7 +25,6 @@
   --paper:var(--night-950); --paper-ink:var(--lav-100); --paper-muted:var(--lav-400);
   --shadow:0 24px 48px -28px rgba(60,30,120,.35);
   --grid-ink:color-mix(in srgb,var(--violet-600) 9%,transparent);
-  --font-hand:"Caveat","Segoe Print","Bradley Hand",cursive;
   --font-display:"Anton",Impact,"Arial Narrow",sans-serif;
   --font-body:"Rajdhani","Segoe UI",system-ui,sans-serif;
   --font-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
@@ -46,12 +45,12 @@ a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration-color:var(--bar)}
 h1,h2,h3,h4{line-height:1.1;margin:0;text-wrap:balance}
 /* Anton tiene un solo peso: se usa en 400 y en mayúsculas. Los títulos chicos van en Rajdhani 700. */
-h1,h2{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:1.02}
+h1,h2{font-family:var(--font-display);font-weight:400;letter-spacing:0;line-height:1.04}
 h3,h4{font-family:var(--font-body);font-weight:700;letter-spacing:0}
 p{margin:0;text-wrap:pretty}
-/* La palabra clave de cada título, escrita a mano en minúscula grande y violeta. */
-.mano{font-family:var(--font-hand);font-weight:700;text-transform:none;letter-spacing:0;color:var(--violet);font-size:1.18em;line-height:.85;white-space:nowrap;margin-inline:.06em}
-.mano.linea{display:block;font-size:1.05em;margin-top:.06em;white-space:normal}
+/* La palabra clave de cada título: misma fuente, en violeta y con un subrayado fino dorado. */
+.clave{color:var(--violet);background:linear-gradient(var(--marker),var(--marker)) no-repeat 0 96% / 100% .05em;padding-bottom:.04em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
 /* Subrayado dorado a mano debajo de las palabras importantes del texto. Se dibuja al entrar en pantalla. */
 .subra{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9.5C38 4.5 74 11 112 7.2S170 4 197 8' fill='none' stroke='%23F2C84B' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 0 100% / 100% .5em;padding-bottom:.08em;-webkit-box-decoration-break:clone;box-decoration-break:clone;color:var(--fg)}
 @media (prefers-reduced-motion: no-preference){
@@ -323,7 +322,7 @@ dl.facts dd{margin:0;text-align:right;font-weight:600}
 .contact .channel{padding:36px 40px}
 .contact .channel + .channel{border-left:1px solid color-mix(in srgb,var(--paper-ink) 18%,transparent)}
 @media (max-width:760px){.contact{grid-template-columns:1fr}.contact .channel{padding:28px 22px}.contact .channel + .channel{border-left:0;border-top:1px solid color-mix(in srgb,var(--paper-ink) 18%,transparent)}}
-.contact h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,3.4vw,38px);letter-spacing:.01em}
+.contact h3{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,3.4vw,38px)}
 .contact p{color:var(--paper-muted);margin-top:10px}
 .contact .mailtxt{font-family:var(--font-mono);font-size:15px;color:var(--paper-ink);margin:6px 0 18px}
 .contact .channel-note{font-size:15px;margin-top:14px}
@@ -363,3 +362,4 @@ footer li{margin-bottom:4px;overflow-wrap:anywhere}
   .btn:active{transform:none}
 }
 @media print{header.top,.tip,.cta-row,.contact .mailbox{display:none}section.alt{border:0}}
+
