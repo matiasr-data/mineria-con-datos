@@ -475,6 +475,94 @@
     if (HAS_IO) new IntersectionObserver(function (es) { heroVis = es[0].isIntersecting; }).observe(rotaW);
   }
 
+
+  /* ---------- Reels: vitrina ----------
+     Las tarjetas salen de datos/publicaciones.js (lo genera actualizar_web.py desde comunidad/publicaciones.csv).
+     Se reproduce un solo avance a la vez, sin sonido: el de la tarjeta bajo el mouse o el foco, y si no hay,
+     la primera tarjeta entera a la vista. El video se crea recién cuando hace falta (no gasta datos antes).
+     No se reproduce solo con el botón de pausa, con movimiento reducido, fuera de pantalla ni con la pestaña oculta. */
+  var vit = document.getElementById("vitrina");
+  var PUBS = window.PUBLICACIONES || [];
+  var IGURL = "https://www.instagram.com/mineriacondatos/";
+  if (vit && PUBS.length) {
+    var MESC = ["ene.", "feb.", "mar.", "abr.", "may.", "jun.", "jul.", "ago.", "sep.", "oct.", "nov.", "dic."];
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var pubs = PUBS.filter(function (p) { return p.estado === "publicado"; }).concat(PUBS.filter(function (p) { return p.estado !== "publicado"; }));
+    vit.innerHTML = pubs.map(function (p) {
+      var pub = p.estado === "publicado", fe = p.fecha ? p.fecha.split("-") : null;
+      var chip = pub ? (fe ? "Publicado el " + (+fe[2]) + " " + MESC[+fe[1] - 1] : "Publicado") : "Próximamente";
+      var src = "reels/" + p.slug;
+      return '<article class="reel" data-src="' + src + ".mp4?v=" + p.v + '">' +
+        '<div class="reel-media"><img src="' + src + ".webp?v=" + p.v + '" alt="" loading="lazy" width="540" height="960">' +
+        '<span class="reel-chip' + (pub ? "" : " prox") + '">' + chip + "</span>" +
+        '<span class="reel-tema">' + esc(p.tema) + "</span></div>" +
+        "<h3>" + esc(p.titulo) + "</h3>" +
+        '<p class="reel-gancho">' + esc(p.gancho) + "</p>" +
+        (pub && p.palabra_clave ? '<p class="reel-kw">Comentá ' + esc(p.palabra_clave) + "</p>" : "") +
+        '<a class="reel-link" href="' + esc(p.url || IGURL) + '" target="_blank" rel="noopener">' +
+        (pub ? (p.url ? "Ver en Instagram" : "Verlo en Instagram") : "Seguir la cuenta") +
+        '<span class="sr-only">: ' + esc(p.titulo) + "</span></a></article>";
+    }).join("");
+    var cards = Array.prototype.slice.call(vit.children), vitVis = false, hoverCard = null, ratios = new Map();
+    function videoDe(c) {
+      var v = c.querySelector("video");
+      if (!v) {
+        v = document.createElement("video");
+        v.muted = true; v.loop = true; v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true");
+        v.preload = "auto"; v.src = c.getAttribute("data-src");
+        c.querySelector(".reel-media").insertBefore(v, c.querySelector(".reel-chip"));
+      }
+      return v;
+    }
+    function activa() {
+      if (hoverCard) return hoverCard;
+      if (paused || still() || document.hidden || !vitVis) return null;
+      for (var k = 0; k < cards.length; k++) if ((ratios.get(cards[k]) || 0) >= 0.85) return cards[k];
+      return null;
+    }
+    function vitSync() {
+      var a = activa();
+      cards.forEach(function (c) {
+        var v = c.querySelector("video");
+        if (c === a) {
+          v = videoDe(c); c.classList.add("play");
+          var pr = v.play(); if (pr && pr.catch) pr.catch(function () { c.classList.remove("play"); });
+        } else if (v) { v.pause(); c.classList.remove("play"); }
+      });
+    }
+    cards.forEach(function (c) {
+      c.addEventListener("mouseenter", function () { hoverCard = c; vitSync(); });
+      c.addEventListener("mouseleave", function () { if (hoverCard === c) hoverCard = null; vitSync(); });
+      c.addEventListener("focusin", function () { hoverCard = c; vitSync(); });
+      c.addEventListener("focusout", function () { if (hoverCard === c) hoverCard = null; vitSync(); });
+    });
+    if (HAS_IO) {
+      var ioCards = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { ratios.set(e.target, e.intersectionRatio); });
+        vitSync();
+      }, { root: vit, threshold: [0, 0.85, 1] });
+      cards.forEach(function (c) { ioCards.observe(c); });
+      new IntersectionObserver(function (es) { vitVis = es[0].isIntersecting; vitSync(); }, { threshold: 0.4 }).observe(vit);
+    }
+    document.addEventListener("visibilitychange", vitSync);
+    document.querySelectorAll("[data-pausa]").forEach(function (b) { b.addEventListener("click", function () { setTimeout(vitSync, 0); }); });
+    /* Flechas: avanzan de a una tarjeta y se apagan en las puntas. */
+    var flechas = Array.prototype.slice.call(document.querySelectorAll(".vit-flecha"));
+    function puntas() {
+      var max = vit.scrollWidth - vit.clientWidth - 2;
+      flechas.forEach(function (b) { b.disabled = +b.getAttribute("data-dir") < 0 ? vit.scrollLeft <= 2 : vit.scrollLeft >= max; });
+    }
+    flechas.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var paso = cards[0].getBoundingClientRect().width + 20;
+        vit.scrollBy({ left: +b.getAttribute("data-dir") * paso, behavior: REDUCE.matches ? "auto" : "smooth" });
+      });
+    });
+    vit.addEventListener("scroll", puntas, { passive: true });
+    window.addEventListener("resize", puntas);
+    puntas();
+  }
+
   /* ---------- Botón de pausa (panel y pie): frena todos los bucles y se recuerda en este navegador ---------- */
   var pauseBtns = Array.prototype.slice.call(document.querySelectorAll("[data-pausa]"));
   function syncPause() {

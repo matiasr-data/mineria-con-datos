@@ -346,6 +346,45 @@ dl.facts dd{margin:0;text-align:right;font-weight:600}
 .guides .dl small{font-size:13px;color:var(--muted)}
 @media (max-width:640px){.guides li{grid-template-columns:1fr}.guides .dl{justify-items:start;text-align:left}}
 
+/* ---------- Reels: vitrina ----------
+   Banda de noche como la portada. Una fila de tarjetas verticales (9:16) que se desliza con el dedo,
+   la rueda o las flechas. Solo se reproduce el avance de una tarjeta a la vez, sin sonido. */
+.vitrina-sec{--fg:#F1EEFB; --muted:#BDB2D6; --line:rgba(241,238,251,.14); --accent:var(--gold-400);
+  color:var(--fg);background:radial-gradient(circle at 88% 0%,rgba(124,58,237,.35) 0,transparent 30%),linear-gradient(180deg,#0B0614,#160C2A);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.vitrina-sec .clave{color:#B9A2FF}
+.vit-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 24px;flex-wrap:wrap;margin-bottom:28px}
+.vit-head .sec-head{margin-bottom:0}
+.vit-ctl{display:flex;gap:10px}
+.vit-flecha{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;display:grid;place-items:center;cursor:pointer;
+  transition:border-color .2s,background-color .2s,opacity .2s}
+.vit-flecha svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.vit-flecha:hover:not(:disabled){border-color:var(--gold-400);background:rgba(255,255,255,.06)}
+.vit-flecha:disabled{opacity:.3;cursor:default}
+.vitrina{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(210px,22vw,248px);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;padding:4px 2px 18px;scrollbar-width:thin;scrollbar-color:rgba(241,238,251,.3) transparent}
+.vitrina:focus-visible{outline:2px solid var(--gold-400);outline-offset:4px}
+.reel{position:relative;scroll-snap-align:start;display:flex;flex-direction:column;min-width:0}
+.reel-media{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#140B24;border:1px solid var(--line);
+  box-shadow:0 24px 40px -28px rgba(0,0,0,.9)}
+.reel-media img,.reel-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.reel-media video{opacity:0;transition:opacity .35s}
+.reel.play .reel-media video{opacity:1}
+.reel-media::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(transparent,rgba(11,6,20,.85));pointer-events:none}
+.reel-chip{position:absolute;z-index:1;top:10px;left:10px;font-family:var(--font-mono);font-size:11px;font-weight:500;padding:4px 9px;border-radius:99px;
+  background:rgba(11,6,20,.72);border:1px solid var(--line);color:var(--fg)}
+.reel-chip.prox{color:var(--gold-400);border-color:rgba(242,200,75,.5)}
+.reel-tema{position:absolute;z-index:1;left:12px;right:12px;bottom:12px;font-size:13.5px;font-weight:600;color:#fff;line-height:1.25}
+.reel h3{font-size:18px;margin-top:14px;line-height:1.2}
+.reel-gancho{font-size:14.5px;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.reel-kw{font-family:var(--font-mono);font-size:12px;color:var(--gold-400);margin-top:10px}
+.reel-link{margin-top:auto;padding-top:12px;font-weight:700;font-size:15px;color:#fff;text-decoration:underline;text-decoration-color:var(--gold-400);
+  text-underline-offset:4px;align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
+.reel-link:hover{color:var(--gold-400)}
+.vit-pie{margin-top:22px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:560px){.vitrina{grid-auto-columns:68vw;gap:14px}.vit-ctl{display:none}}
+
 /* ---------- Empresas ---------- */
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px 48px}
 .panel{border-top:2px solid var(--fg);padding-top:20px}
