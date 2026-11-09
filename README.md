@@ -31,6 +31,7 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 ## Detalles útiles
 
 - El gráfico de producción se puede compartir ya filtrado: `?base=barrick` abre la vista de la parte de Barrick (50%).
+- Portada de noche: la palabra grande rota entre "Oro", "Dólares", "Empleo" y "Proyectos" y marca la columna de la franja de cifras que le corresponde. La cifra de oro sale sola del CSV; las otras tres (exportaciones 2025, puestos de junio de 2026 y proyectos del SIACAM) están escritas en `index.html` y se actualizan a mano cuando salga un dato nuevo. La sierra del fondo se dibuja con código; para usar una foto propia, ver "Portada de noche" en `estilos.css`.
 - Las curvas de nivel de la portada se dibujan al cargar solo si la persona no pidió movimiento reducido en su sistema. Lo mismo con la animación de las barras.
 - Movimiento del panel (en `app.js`, sección "Movimiento"): cada gráfico se arma una vez cuando se ve el 35%, en orden cronológico, y después queda en bucle (ola en las barras, pulso en las líneas, reflejo en la guía, veta que fluye en la portada). El botón "Pausar animación" (en el panel y en el pie) frena todo y se recuerda en el navegador. Fuera de pantalla o con la pestaña en segundo plano, el bucle se frena solo. Con movimiento reducido, todo queda quieto.
 - Los datos estructurados (schema.org `WebSite` y `Dataset`) están en el `<head>` de `index.html`. El de `Dataset` permite que la tabla de Veladero aparezca en Google Dataset Search; actualizar `temporalCoverage` cuando se sumen trimestres.

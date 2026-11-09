@@ -392,23 +392,12 @@
     document.getElementById("panel-body").hidden = true;
   }
 
-  /* Ficha de la portada: último dato cargado y la serie de producción */
-  var snap = document.getElementById("snap-body");
-  if (snap && D.length) {
-    var lf = D.filter(function (d) { return d.p100 != null; }), ls = lf[lf.length - 1], lp = prevOf(ls);
-    snap.innerHTML = '<div class="snap-q">Veladero, ' + ls.full + ". Oro producido, mina completa</div>" +
-      '<div class="snap-v">' + f(ls.p100) + "<small>" + NB + "mil onzas</small></div>" +
-      (lp && lp.p100 != null ? '<div class="chg ' + (ls.p100 < lp.p100 ? "down" : "up") + '">' + pf(pct(ls.p100, lp.p100)) + " vs " + lp.full + "</div>" : "") +
-      '<svg viewBox="0 0 300 64" role="img" aria-label="Producción trimestral de ' + D[0].full + " a " + D[D.length - 1].full + '"></svg>' +
-      '<div class="snap-f">Fuente: informes trimestrales de Barrick. Actualizado el ' + (BASE.actualizado || "s/d") + ".</div>";
-    var sv = snap.querySelector("svg"), mx = Math.max.apply(null, lf.map(function (d) { return d.p100; }));
-    var pts = D.map(function (d, i) { return d.p100 == null ? null : [8 + i * (284 / (D.length - 1)), 50 - (d.p100 / mx) * 40]; });
-    var dpath = "", on = false;
-    pts.forEach(function (p) { if (!p) { on = false; return; } dpath += (on ? " L" : " M") + p[0].toFixed(1) + " " + p[1].toFixed(1); on = true; });
-    el("path", { d: dpath, "class": "sp-line" }, sv);
-    pts.forEach(function (p, i) { if (p && (i === 0 || i === pts.length - 1)) el("circle", { cx: p[0], cy: p[1], r: 3.5, "class": "sp-dot" }, sv); });
-    txt(8, 63, D[0].q, { "class": "sp-lbl" }, sv);
-    txt(292, 63, D[D.length - 1].q, { "class": "sp-lbl", "text-anchor": "end" }, sv);
+  /* Franja de la portada: la cifra de oro sale del último trimestre cargado. */
+  var lf = D.filter(function (d) { return d.p100 != null; }), ls = lf[lf.length - 1];
+  if (ls) {
+    var frO = document.getElementById("fr-oro"), frQ = document.getElementById("fr-oro-q");
+    if (frO) frO.textContent = f(ls.p100);
+    if (frQ) frQ.textContent = ls.full;
   }
 
   /* Fecha de actualización y próximo informe */
@@ -444,6 +433,48 @@
   /* Fuera de pantalla, la veta se queda quieta. */
   if (s && HAS_IO) new IntersectionObserver(function (es) { s.classList.toggle("off", !es[0].isIntersecting); }).observe(s);
 
+
+  /* ---------- Portada: la palabra grande rota entre los temas de la franja ----------
+     Cada 3,6 s cambia la palabra y se marca la columna de la franja que le corresponde.
+     Sale desenfocándose y la nueva entra subiendo y enfocándose, como el texto de los carruseles.
+     Se frena con el botón de pausa, fuera de pantalla y con la pestaña en segundo plano. Con movimiento reducido queda quieta en "Oro". */
+  var rotaW = document.getElementById("rota-w"), franja = document.getElementById("franja");
+  var cols = franja ? Array.prototype.slice.call(franja.children) : [];
+  var PALABRAS = ["Oro", "Dólares", "Empleo", "Proyectos"], ri = 0, heroVis = true;
+  /* Sierra: tres filas de cerros con semilla fija, de atrás hacia adelante. */
+  var sierra = document.getElementById("sierra");
+  if (sierra) {
+    [[0.30, 120, 3.1, "s1"], [0.50, 90, 5.3, "s2"], [0.72, 60, 8.7, "s3"]].forEach(function (cfg, k) {
+      var base = 360 * cfg[0], amp = cfg[1], seed = cfg[2], d = "M0 360 L0 " + base.toFixed(1), cres = "";
+      for (var x = 0; x <= 1440; x += 12) {
+        var h = Math.abs(Math.sin(x / 210 + seed)) * amp * 0.6 + Math.sin(x / 63 + seed * 2) * amp * 0.18 + Math.sin(x / 23 + seed) * amp * 0.06;
+        var yy = base + amp * 0.35 - h;
+        d += " L" + x + " " + yy.toFixed(1);
+        cres += (x ? " L" : "M") + x + " " + yy.toFixed(1);
+      }
+      el("path", { d: d + " L1440 360 Z", "class": cfg[3] }, sierra);
+      if (k === 1) el("path", { d: cres, "class": "cresta" }, sierra);
+    });
+  }
+  function marcar(i) { cols.forEach(function (c, k) { c.classList.toggle("on", k === i); }); }
+  function rotar() {
+    if (paused || still() || document.hidden || !heroVis || !rotaW) return;
+    ri = (ri + 1) % PALABRAS.length;
+    var out = rotaW.animate([{ opacity: 1, filter: "blur(0)", transform: "translateY(0)" }, { opacity: 0, filter: "blur(12px)", transform: "translateY(-10px)" }],
+      { duration: 320, easing: "ease-in", fill: "forwards" });
+    out.onfinish = function () {
+      rotaW.textContent = PALABRAS[ri]; out.cancel();
+      rotaW.animate([{ opacity: 0, filter: "blur(18px)", transform: "translateY(18px)" }, { opacity: 1, filter: "blur(0)", transform: "translateY(0)" }],
+        { duration: 720, easing: E_OUT });
+      marcar(ri);
+    };
+  }
+  if (rotaW && !still()) {
+    marcar(0);
+    setInterval(rotar, 3600);
+    if (HAS_IO) new IntersectionObserver(function (es) { heroVis = es[0].isIntersecting; }).observe(rotaW);
+  }
+
   /* ---------- Botón de pausa (panel y pie): frena todos los bucles y se recuerda en este navegador ---------- */
   var pauseBtns = Array.prototype.slice.call(document.querySelectorAll("[data-pausa]"));
   function syncPause() {
@@ -464,7 +495,7 @@
   syncPause();
   if (REDUCE.addEventListener) REDUCE.addEventListener("change", function () {
     syncPause();
-    if (REDUCE.matches) armed.forEach(clearLoops);
+    if (REDUCE.matches) { armed.forEach(clearLoops); if (rotaW) { rotaW.textContent = PALABRAS[0]; marcar(-1); } }
   });
 
   /* ---------- Navegación: marca la sección visible ---------- */

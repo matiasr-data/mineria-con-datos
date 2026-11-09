@@ -147,6 +147,59 @@ nav a.nav-contacto::before{content:"";position:absolute;left:-18px;top:50%;width
 .method div{font-size:14px;color:var(--muted)}
 .method b{display:block;color:var(--fg);font-weight:600;margin-bottom:2px}
 
+/* ---------- Portada de noche ----------
+   Como los slides oscuros de los carruseles: noche violeta, luces doradas, una sierra dibujada por código
+   y las curvas de nivel con la veta dorada. Para usar una foto propia (de uso libre o tuya), guardarla en
+   img/portada.webp y agregar a .hero.noche: background-image: linear-gradient(...tinte...), url(img/portada.webp). */
+.hero.noche{
+  --fg:#F1EEFB; --muted:#BDB2D6; --line:rgba(241,238,251,.14); --accent:var(--gold-400); --bar:var(--gold-400); --vein-glint:var(--gold-100);
+  --clave-osc:#B9A2FF;
+  color:var(--fg);padding-block:44px 0;display:flex;flex-direction:column;min-height:min(calc(100svh - 64px),900px);
+  background:
+    radial-gradient(circle at 84% 18%,rgba(124,58,237,.55) 0,transparent 34%),
+    radial-gradient(circle at 92% 8%,rgba(242,200,75,.30) 0,transparent 7%),
+    radial-gradient(circle at 6% 30%,rgba(124,58,237,.30) 0,transparent 22%),
+    linear-gradient(180deg,#0B0614 0%,#160C2A 55%,#0B0614 100%)}
+.hero.noche .clave{color:var(--clave-osc)}
+.hero.noche svg.sierra{position:absolute;left:0;right:0;bottom:0;width:100%;height:62%;pointer-events:none}
+.sierra .s1{fill:#2B1C4A}.sierra .s2{fill:#1F1338}.sierra .s3{fill:#130A24}
+.sierra .cresta{fill:none;stroke:rgba(242,200,75,.28);stroke-width:1.2}
+.hero.noche .contour path{stroke:rgba(241,238,251,.10)}
+.hero.noche svg.contour{-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent 45%,#000 80%);mask-image:linear-gradient(90deg,transparent 0,transparent 45%,#000 80%)}
+.hero.noche .contour path.vein{stroke:var(--gold-400);opacity:.75}
+.hero.noche > .wrap{width:100%}
+.hero-main{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:28px}
+.pastilla{align-self:flex-start;font-family:var(--font-mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg);background:rgba(11,6,20,.55);border:1px solid var(--line);border-radius:99px;padding:8px 16px;margin-bottom:18px;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.hero.noche h1{font-size:clamp(26px,3.4vw,40px);max-width:30ch;line-height:1.08}
+.rota{font-family:var(--font-display);font-weight:400;font-size:clamp(72px,12.5vw,150px);line-height:.92;margin:8px 0 16px;color:#fff;
+  letter-spacing:-.005em;white-space:nowrap}
+.rota i{font-style:normal;color:var(--gold-400)}
+.rota span{display:inline-block;will-change:transform,filter,opacity}
+.hero.noche p.lead{color:var(--muted);max-width:58ch;margin-top:0}
+.btn.oro{background:var(--gold-400);border-color:var(--gold-400);color:#150A24;border-radius:4px}
+.btn.oro:hover{background:#FFD966;border-color:#FFD966}
+.btn.linea{background:rgba(11,6,20,.35);color:#fff;border-color:rgba(255,255,255,.55);border-radius:4px}
+.btn.linea:hover{border-color:var(--gold-400)}
+.coords{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;margin-top:26px;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;color:var(--gold-400)}
+.btn.mini{min-height:36px;padding:5px 12px;font-size:13px;font-family:var(--font-body);color:var(--muted);border-color:var(--line);background:transparent;letter-spacing:0}
+.franja{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;border-top:1px solid var(--line);
+  background:rgba(11,6,20,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:12px 12px 0 0;overflow:hidden}
+.franja > div{position:relative;padding:18px 22px 16px;border-left:1px solid var(--line);display:flex;flex-direction:column;transition:background-color .4s}
+.franja > div:first-child{border-left:0}
+.franja > div::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--gold-400);transform:scaleX(0);transform-origin:0 50%;transition:transform .7s var(--ease-out)}
+.franja > div.on{background:rgba(124,58,237,.16)}
+.franja > div.on::before{transform:scaleX(1)}
+.franja dt{order:2;font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.35}
+.franja dd{margin:0;order:1;font-size:14px;color:var(--muted)}
+.franja dd b{font-family:var(--font-display);font-weight:400;font-size:clamp(30px,3.2vw,42px);color:#fff;line-height:1;margin-right:4px}
+.franja dd.fr-src{order:3;font-family:var(--font-mono);font-size:11px;color:var(--muted);opacity:.85;margin-top:8px}
+@media (max-width:860px){.franja{grid-template-columns:repeat(2,minmax(0,1fr))}.franja > div:nth-child(3){border-left:0}.franja > div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:420px){.franja > div{padding:14px 14px 12px}}
+@media (max-width:560px){.hero.noche{padding-top:36px;min-height:0}.coords{margin-top:24px}.pastilla{font-size:11px;letter-spacing:.08em;padding:7px 12px}}
+.intro{padding-block:8px 0}
+
 /* ---------- Secciones ---------- */
 section{padding-block:80px}
 section.alt{background:color-mix(in srgb,var(--violet) 5%,transparent);border-block:1px solid var(--line);
