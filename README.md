@@ -59,6 +59,7 @@ y abrir http://localhost:8765.
   ```
 
   GitHub Pages lo actualiza en uno o dos minutos.
+- `actualizar_web.py` sella las versiones: agrega `?v=<huella>` a `estilos.css`, `app.js` y `datos/veladero.js` en `index.html` y `404.html`. Así el navegador no mezcla una página nueva con un estilo viejo. Correrlo siempre antes de publicar.
 - Si más adelante se usa un dominio propio, cambiar la dirección en `index.html` (canonical, og:url y og:image), `robots.txt` y `sitemap.xml`.
 
 ## Pendiente
