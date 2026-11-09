@@ -220,6 +220,12 @@ p.sub-p{color:var(--muted);max-width:64ch;margin:-8px 0 24px}
 .kpis,.chart{background-color:var(--raised);border:1px solid var(--line);border-radius:14px;
   background-image:linear-gradient(var(--grid-ink) 1px,transparent 1px),linear-gradient(90deg,var(--grid-ink) 1px,transparent 1px);
   background-size:28px 28px;background-position:-1px -1px}
+/* En el panel de Veladero las tarjetas van en violeta claro (no blanco), con la cuadrícula un poco más marcada.
+   Contraste sobre #E2D6F9: texto secundario #5B4E78 5,5:1; barras violetas 4,1:1; rojo #A12E19 5,2:1 y verde #0B6640 5,1:1
+   (el rojo y el verde se oscurecen solo acá, porque los de siempre no llegaban a 4,5:1 sobre el violeta). */
+#panel{--panel-card:#E2D6F9;--warn:#A12E19;--good:#0B6640}
+#panel .kpis,#panel .chart,#panel details{background-color:var(--panel-card);border-color:#CBB9F0;--grid-ink:rgba(124,58,237,.14)}
+#panel .chart .dot{stroke:var(--panel-card)}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:24px;overflow:hidden}
 .kpi{padding:20px 22px 18px;border-left:1px solid var(--line)}
 .kpi:first-child{border-left:0}
