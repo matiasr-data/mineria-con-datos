@@ -1,7 +1,7 @@
 // Generado por herramientas/actualizar_web.py. No editar a mano:
 // cambiá datos/data/veladero_trimestral_barrick.csv y volvé a correr el script.
 window.VELADERO = {
- "actualizado": "9 de noviembre de 2026",
+ "actualizado": "10 de noviembre de 2026",
  "filas": [
   {
    "anio": 2025,

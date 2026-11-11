@@ -118,7 +118,7 @@ window.PUBLICACIONES = [
   "tema": "Mantenimiento predictivo (datos simulados)",
   "palabra_clave": "SENSORES",
   "url": "",
-  "v": "c1b83d04"
+  "v": "7705c3b0"
  },
  {
   "slug": "car-vibra",

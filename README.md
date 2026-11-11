@@ -11,7 +11,11 @@ Sitio estático (HTML, CSS y JavaScript, sin dependencias ni instalación). Se p
 - `img/vibracion_camiones.webp` y `.png`: gráfico del ejemplo de mantenimiento predictivo (datos simulados). El navegador usa el WebP, que pesa menos de la mitad.
 - `guias/*.pdf`: las guías descargables. **Se copian solas desde `recursos/`** al correr el script.
 - `404.html`: la página que aparece si alguien entra a una dirección que no existe.
-- `robots.txt` y `sitemap.xml`: para buscadores.
+- `privacidad.html`: política de privacidad (sin cookies ni estadísticas; GitHub Pages y Google Fonts). Si se suma un formulario o estadísticas, actualizarla.
+- Preguntas frecuentes (sección `#preguntas`): las mismas cinco van en el `FAQPage` del `<head>`. Si se cambia una, cambiar las dos.
+- Contacto: "Respondo en menos de 48 horas hábiles". Cambiarlo si el plazo es otro.
+- Botón fijo de contacto en el celular (`#barra-movil`): aparece al salir de la portada y se esconde en Contacto.
+- `robots.txt` y `sitemap.xml`: para buscadores. El `sitemap.xml` lo escribe `actualizar_web.py` con la fecha del día.
 - `img/compartir.png`: imagen que aparece cuando se comparte el enlace en LinkedIn o WhatsApp. Se genera con `herramientas/imagen_compartir.html` (el comando está en ese archivo).
 
 ## Actualizar el panel cuando Barrick publica un trimestre

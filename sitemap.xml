@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://matiasr-data.github.io/mineria-con-datos/</loc>
-    <lastmod>2026-11-04</lastmod>
+    <lastmod>2026-11-10</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://matiasr-data.github.io/mineria-con-datos/privacidad.html</loc>
+    <lastmod>2026-11-10</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

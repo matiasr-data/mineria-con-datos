@@ -715,6 +715,17 @@
     trazos.forEach(function (t) { io3.observe(t); });
   }
 
+  /* ---------- Botón fijo de contacto en el celular ----------
+     Aparece cuando la portada ya salió de pantalla y se esconde mientras se ve la sección Contacto. */
+  var barra = document.getElementById("barra-movil");
+  if (barra && HAS_IO) {
+    var portadaVis = true, contactoVis = false;
+    var barraSync = function () { barra.hidden = false; barra.classList.toggle("oculta", portadaVis || contactoVis); };
+    var portadaEl = document.getElementById("inicio"), contactoEl = document.getElementById("contacto");
+    if (portadaEl) new IntersectionObserver(function (es) { portadaVis = es[0].isIntersecting; barraSync(); }).observe(portadaEl);
+    if (contactoEl) new IntersectionObserver(function (es) { contactoVis = es[0].isIntersecting; barraSync(); }).observe(contactoEl);
+  }
+
   /* ---------- Copiar correo ---------- */
   var btn = document.getElementById("copy"), mail = document.getElementById("mail");
   if (btn) btn.addEventListener("click", function () {

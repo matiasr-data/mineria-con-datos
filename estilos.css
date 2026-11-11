@@ -555,6 +555,39 @@ main a:not(.btn):not(.aud),footer a{transition:opacity .2s,color .2s}
   .btn:hover,.btn:active,.vit-flecha:hover,.vit-flecha:active,.aud:hover{transform:none}
 }
 
+/* ---------- Preguntas frecuentes ---------- */
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{margin:0;background:var(--raised);border:1px solid var(--line);border-radius:12px}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px;font-size:17px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--font-mono);font-size:20px;color:var(--violet);transition:transform .25s var(--ease-out)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 18px 18px;color:var(--muted);max-width:70ch}
+.respuesta{margin-top:10px;font-size:15.5px;color:var(--muted)}
+.respuesta b{color:var(--fg)}
+
+/* ---------- Botón fijo de contacto en el celular ---------- */
+.barra-movil{display:none}
+@media (max-width:640px){
+  .barra-movil{position:fixed;z-index:30;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));display:flex;gap:8px;padding:8px;
+    border-radius:14px;background:rgba(11,6,20,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 18px 30px -16px rgba(0,0,0,.7);
+    transition:transform .35s var(--ease-out),opacity .25s}
+  .barra-movil .btn{flex:1;min-height:46px}
+  .barra-movil.oculta{transform:translateY(130%);opacity:0;pointer-events:none}
+  .barra-movil[hidden]{display:none !important}
+  footer{padding-bottom:110px}
+}
+
+/* ---------- Página de privacidad ---------- */
+.legal{max-width:720px;padding-block:72px 96px}
+.legal .kicker a{text-decoration:none;color:var(--violet)}
+.legal h1{font-size:clamp(36px,6vw,58px);margin-top:10px}
+.legal h2{font-size:clamp(24px,3.4vw,30px);margin-top:36px}
+.legal p,.legal li{margin-top:10px;color:var(--muted)}
+.legal b{color:var(--fg)}
+.legal ul{padding-left:20px}
+.legal-fecha{font-family:var(--font-mono);font-size:13px}
+
 /* ---------- Movimiento reducido: sin desplazamientos; quedan los fundidos cortos y el foco ---------- */
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}

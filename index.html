@@ -19,11 +19,11 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Minería con Datos: los datos de la minería sanjuanina, claros y con fuente.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2315201B'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23D9A441' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B0614'/%3E%3Crect x='11' y='11' width='10' height='10' fill='%23FFE66B' transform='rotate(45 16 16)'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@500;700&family=Rajdhani:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="estilos.css?v=25d33305">
+<link rel="stylesheet" href="estilos.css?v=bcfb2095">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,6 +57,88 @@
   "distribution": {"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": "https://matiasr-data.github.io/mineria-con-datos/datos/veladero_trimestral_barrick.csv"}
 }
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ProfessionalService",
+ "name": "Minería con Datos",
+ "url": "https://matiasr-data.github.io/mineria-con-datos/",
+ "image": "https://matiasr-data.github.io/mineria-con-datos/img/compartir.png",
+ "description": "Ciencia de datos aplicada a la minería de San Juan: tableros, orden de datos y pruebas de concepto para empresas mineras y proveedores.",
+ "email": "matiasrico21ps@gmail.com",
+ "areaServed": {
+  "@type": "AdministrativeArea",
+  "name": "San Juan, Argentina"
+ },
+ "address": {
+  "@type": "PostalAddress",
+  "addressRegion": "San Juan",
+  "addressCountry": "AR"
+ },
+ "founder": {
+  "@type": "Person",
+  "name": "Matías"
+ },
+ "knowsAbout": [
+  "Ciencia de datos",
+  "Minería",
+  "Tableros",
+  "Python",
+  "SQL"
+ ],
+ "sameAs": [
+  "https://www.instagram.com/mineriacondatos/"
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "¿De dónde salen los datos?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "De fuentes primarias: los informes trimestrales de Barrick (Mine Statistics y MD&A) para Veladero, la Secretaría de Minería de la Nación para exportaciones, empleo y la cartera de proyectos (SIACAM), y el Boletín Oficial para el RIGI. La prensa se usa solo como dato secundario y se contrasta con la fuente original. Cada cifra lleva su fuente y su fecha."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Es una página oficial o de alguna empresa minera?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Es un proyecto educativo independiente de Matías, estudiante de Ciencia de Datos en la Universidad Siglo 21. No tiene relación con las empresas mencionadas y no es asesoramiento de inversión."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cada cuánto se actualiza?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "El panel de Veladero se actualiza cuando Barrick publica su informe trimestral. Las exportaciones mineras salen todos los meses, con un mes de demora, y el empleo minero unos tres meses después de cada mes."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Puedo usar las cifras o descargar los datos?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sí. La tabla de Veladero se descarga en CSV desde el panel y las guías en PDF desde la sección Guías. Si las usás, citá la fuente original (por ejemplo, el informe de Barrick o la Secretaría de Minería) y, si querés, esta página."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo trabajás con una empresa?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Empezamos por una charla para ver qué datos tienen y qué quieren resolver. Después, con una muestra de esos datos, armo una prueba chica (un tablero, un informe o una alerta) y decidimos juntos si sirve seguir."
+   }
+  }
+ ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#principal">Saltar al contenido</a>
@@ -71,6 +153,7 @@
       <a href="#guias">Guías</a>
       <a href="#reels">Publicaciones</a>
       <a href="#empresas">Para empresas</a>
+      <a href="#preguntas">Preguntas</a>
       <a class="nav-contacto" href="#contacto">Contacto</a>
     </nav>
   </div>
@@ -412,12 +495,30 @@
   </div>
 </section>
 
+<!-- ============ PREGUNTAS FRECUENTES ============ -->
+<section id="preguntas">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Preguntas <span class="clave">frecuentes</span></h2>
+      <p>Lo que más me preguntan por mensaje sobre los datos y el proyecto.</p>
+    </div>
+    <div class="faq">
+      <details><summary>¿De dónde salen los datos?</summary><p>De fuentes primarias: los informes trimestrales de Barrick (Mine Statistics y MD&amp;A) para Veladero, la Secretaría de Minería de la Nación para exportaciones, empleo y la cartera de proyectos (SIACAM), y el Boletín Oficial para el RIGI. La prensa se usa solo como dato secundario y se contrasta con la fuente original. Cada cifra lleva su fuente y su fecha.</p></details>
+      <details><summary>¿Es una página oficial o de alguna empresa minera?</summary><p>No. Es un proyecto educativo independiente de Matías, estudiante de Ciencia de Datos en la Universidad Siglo 21. No tiene relación con las empresas mencionadas y no es asesoramiento de inversión.</p></details>
+      <details><summary>¿Cada cuánto se actualiza?</summary><p>El panel de Veladero se actualiza cuando Barrick publica su informe trimestral. Las exportaciones mineras salen todos los meses, con un mes de demora, y el empleo minero unos tres meses después de cada mes.</p></details>
+      <details><summary>¿Puedo usar las cifras o descargar los datos?</summary><p>Sí. La tabla de Veladero se descarga en CSV desde el panel y las guías en PDF desde la sección Guías. Si las usás, citá la fuente original (por ejemplo, el informe de Barrick o la Secretaría de Minería) y, si querés, esta página.</p></details>
+      <details><summary>¿Cómo trabajás con una empresa?</summary><p>Empezamos por una charla para ver qué datos tienen y qué quieren resolver. Después, con una muestra de esos datos, armo una prueba chica (un tablero, un informe o una alerta) y decidimos juntos si sirve seguir.</p></details>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CONTACTO ============ -->
 <section id="contacto">
   <div class="wrap">
     <div class="sec-head">
       <h2>Contacto</h2>
       <p>Para consultas, propuestas de trabajo o datos que quieras compartir. Contame qué tenés y qué querés resolver.</p>
+      <p class="respuesta"><b>Respondo en menos de 48 horas hábiles</b>, por correo o por mensaje directo.</p>
     </div>
     <div class="contact">
       <div class="channel">
@@ -454,15 +555,21 @@
       <li>Tiempo de San Juan: <a href="https://www.tiempodesanjuan.com/mineria/la-ia-llego-a-las-minas-los-5-usos-clave-que-transforman-la-industria-y-la-clave-academica-en-san-juan_1784564840/amp" target="_blank" rel="noopener">usos de la IA en minería</a></li>
       <li>Ministerio de Minería de San Juan: <a href="https://mineria.sanjuan.gob.ar/" target="_blank" rel="noopener">mineria.sanjuan.gob.ar</a></li>
     </ul>
-    <p style="margin-top:16px">Proyecto educativo independiente, sin relación con las empresas mencionadas. No constituye asesoramiento de inversión.</p>
+    <p style="margin-top:16px">Proyecto educativo independiente, sin relación con las empresas mencionadas. No constituye asesoramiento de inversión. <a href="privacidad.html">Política de privacidad</a>.</p>
   </div>
 </footer>
 
+<!-- Botón fijo de contacto en el celular: aparece al bajar de la portada y se esconde al llegar a Contacto. -->
+<div class="barra-movil" id="barra-movil" hidden>
+  <a class="btn oro" href="#contacto">Contacto</a>
+  <a class="btn linea" href="https://www.instagram.com/mineriacondatos/" target="_blank" rel="noopener">Instagram</a>
+</div>
+
 <div class="tip" id="tip" aria-hidden="true"></div>
 
-<script src="datos/veladero.js?v=e9d85133"></script>
+<script src="datos/veladero.js?v=8ebe57f0"></script>
 <script src="datos/proyectos.js?v=ec5bc9ed"></script>
-<script src="datos/publicaciones.js?v=66b2a430"></script>
-<script src="app.js?v=56e8076f"></script>
+<script src="datos/publicaciones.js?v=0a5a7791"></script>
+<script src="app.js?v=b332f14c"></script>
 </body>
 </html>
